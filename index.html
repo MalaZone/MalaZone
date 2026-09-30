@@ -7,6 +7,18 @@
   <!-- CDN Tailwind + DaisyUI -->
   <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brandRed: '#d32436',
+            brandYellow: '#f9bb0b',
+          }
+        }
+      }
+    }
+  </script>
 </head>
 <body class="min-h-screen bg-white text-base-content flex flex-col justify-between">
 
@@ -111,5 +123,6 @@
 
   <!-- SCRIPT JS ESTERNO -->
   <script src="script.js"></script>
+  
 </body>
 </html>
