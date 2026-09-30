@@ -17,7 +17,7 @@
   <!-- NAVBAR -->
   <header class="navbar bg-white text-base-content border-b border-gray-100 px-4 lg:px-8 sticky top-0 z-50">
     <div class="navbar-start">
-      <a href="#" class="btn btn-ghost p-1 flex items-center">
+      <a href="index.html" class="btn btn-ghost p-1 flex items-center">
         <img src="media/logo.png" alt="Mala Zone Logo" class="h-10 w-auto object-contain" />
       </a>
     </div>
@@ -25,10 +25,9 @@
     <!-- MENU DESKTOP -->
     <div class="navbar-center hidden lg:flex">
       <ul class="menu menu-horizontal px-1 font-medium gap-2">
-        <li><a href="#chi-siamo">Chi siamo</a></li>
-        <li><a href="#eventi">Eventi</a></li>
-        <li><a href="#social">Social</a></li>
-        <li><a href="#contatti">Contatti</a></li>
+        <li><a href="chi-siamo.html">Chi siamo</a></li>
+        <li><a href="eventi.html">Eventi</a></li>
+        <li><a href="contatti.html">Contatti</a></li>
       </ul>
     </div>
 
@@ -43,10 +42,6 @@
           </svg>
         </div>
         <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-3 shadow-lg bg-white rounded-box w-56 gap-2">
-          <li><a href="#chi-siamo">Chi siamo</a></li>
-          <li><a href="#eventi">Eventi</a></li>
-          <li><a href="#social">Social</a></li>
-          <li><a href="#contatti">Contatti</a></li>
           <div class="divider my-1"></div>
           <li><a href="#contatti" class="btn btn-primary btn-sm text-white">Diventa socio</a></li>
         </ul>
@@ -67,7 +62,6 @@
           <div class="absolute flex flex-col justify-center items-center inset-0 text-white text-center p-4 md:p-6 bg-black/40">
             <h2 class="text-2xl sm:text-4xl md:text-6xl font-black mb-3">GCC & TCG</h2>
             <p class="text-sm sm:text-base md:text-xl max-w-xl mb-6">Scambi, tornei e community per tutti gli appassionati di carte collezionabili.</p>
-            <a href="#eventi" class="btn btn-primary btn-sm md:btn-lg">Scopri gli eventi</a>
           </div>
         </div>
 
@@ -77,7 +71,6 @@
           <div class="absolute flex flex-col justify-center items-center inset-0 text-white text-center p-4 md:p-6 bg-black/40">
             <h2 class="text-2xl sm:text-4xl md:text-6xl font-black mb-3">Dungeons & Dragons</h2>
             <p class="text-sm sm:text-base md:text-xl max-w-xl mb-6">Sessioni di gioco di ruolo, campagne epiche e tavoli per principianti ed esperti.</p>
-            <a href="#contatti" class="btn btn-secondary btn-sm md:btn-lg">Unisciti a un tavolo</a>
           </div>
         </div>
 
@@ -87,7 +80,6 @@
           <div class="absolute flex flex-col justify-center items-center inset-0 text-white text-center p-4 md:p-6 bg-black/40">
             <h2 class="text-2xl sm:text-4xl md:text-6xl font-black mb-3">Gaming & Tornei</h2>
             <p class="text-sm sm:text-base md:text-xl max-w-xl mb-6">Tornei videoludici, sfide LAN, console e serate multiplayer per la community.</p>
-            <a href="#eventi" class="btn btn-primary btn-sm md:btn-lg">Iscriviti ai tornei</a>
           </div>
         </div>
 
@@ -97,7 +89,6 @@
           <div class="absolute flex flex-col justify-center items-center inset-0 text-white text-center p-4 md:p-6 bg-black/40">
             <h2 class="text-2xl sm:text-4xl md:text-6xl font-black mb-3">Community & Meetup</h2>
             <p class="text-sm sm:text-base md:text-xl max-w-xl mb-6">I nostri ritrovi settimanali per giocare, conoscersi e stare insieme.</p>
-            <a href="#chi-siamo" class="btn btn-secondary btn-sm md:btn-lg">Diventa Socio</a>
           </div>
         </div>
 
@@ -221,7 +212,7 @@
               <ul class="space-y-4 mb-8">
                 <li class="flex items-center gap-3 text-gray-700 font-medium">
                   <span class="text-xl">🗓️</span>
-                  <span><strong>Quando:</strong> Tutti i sabati pomeridiani</span>
+                  <span><strong>Quando:</strong> Tutti i sabati</span>
                 </li>
                 <li class="flex items-center gap-3 text-gray-700 font-medium">
                   <span class="text-xl">⏰</span>
@@ -234,22 +225,15 @@
               </ul>
             </div>
 
-            <!-- LINK MAPS CON DESTINAZIONE PREIMPOSTATA -->
-            <a href="https://www.google.com/maps/dir/?api=1&destination=La+Muffetteria+Via+Cerchiara+1+Riano" target="_blank" rel="noopener" class="btn btn-primary btn-md w-full sm:w-auto">
+            <!-- LINK MAPS DIRETTO CON LINK BREVE -->
+            <a href="https://maps.app.goo.gl/9EVYemJrGzczfpBx5" target="_blank" rel="noopener" class="btn btn-primary btn-md w-full sm:w-auto">
               Apri indicazioni stradali
             </a>
           </div>
 
           <!-- MAPPA GOOGLE INTEGRATA -->
           <div class="w-full h-[350px] lg:h-auto rounded-3xl overflow-hidden border border-gray-200 shadow-sm min-h-[300px]">
-            <iframe 
-              title="Mappa La Muffetteria Riano"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2963.265147823315!2d12.5135111!3d42.0911!2m3!1f0!2f0!3f0!2m3!1i1024!2i768!4f13.1!3m3!1m2!1s0x132f63810145244d%3A0x8e82a392815c48b!2sLa%20Muffetteria!5e0!3m2!1sit!2sit!4v1700000000000!5m2!1sit!2sit" 
-              class="w-full h-full border-0" 
-              allowfullscreen="" 
-              loading="lazy" 
-              referrerpolicy="no-referrer-when-downgrade">
-            </iframe>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2961.150311499294!2d12.543664399999997!3d42.082828899999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x132f6fe91f0333e3%3A0xc50c7e0ffa88ac16!2sLa%20Muffetteria!5e0!3m2!1sit!2sit!4v1790779545672!5m2!1sit!2sit" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
           </div>
 
         </div>
@@ -268,11 +252,8 @@
         </p>
         
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="#" class="btn btn-secondary btn-lg border-none text-black font-bold">
-            Entra nel gruppo WhatsApp
-          </a>
-          <a href="#" class="btn btn-outline text-[#f9bb0b] hover:bg-[#f9bb0b] hover:text-black btn-lg border-[#f9bb0b]">
-            Seguici su Instagram
+          <a href="contatti.html" class="btn btn-secondary btn-lg border-none text-black font-bold">
+            Contattaci
           </a>
         </div>
       </div>
