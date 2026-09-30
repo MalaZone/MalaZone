@@ -63,7 +63,7 @@
         <div class="carousel-slide w-full min-w-full h-full relative flex-shrink-0">
           <img src="media/slider/gcc.jpg" class="w-full h-full object-cover brightness-50" alt="GCC e Carte" />
           <div class="absolute flex flex-col justify-center items-center inset-0 text-white text-center p-4 md:p-6 bg-black/40">
-            <h2 class="text-2xl sm:text-4xl md:text-6xl font-black mb-3">GCC & Pokémon TCG</h2>
+            <h2 class="text-2xl sm:text-4xl md:text-6xl font-black mb-3">GCC & TCG</h2>
             <p class="text-sm sm:text-base md:text-xl max-w-xl mb-6">Scambi, tornei e community per tutti gli appassionati di carte collezionabili.</p>
             <a href="#eventi" class="btn btn-primary btn-sm md:btn-lg">Scopri gli eventi</a>
           </div>
@@ -102,8 +102,8 @@
       </div>
     </section>
 
-    <!-- BANNER ORARIO E SEDE RISALTATO -->
-    <section id="meetup" class="bg-[#f9bb0b] text-gray-900 py-4 px-4 text-center font-bold border-b border-gray-200">
+    <!-- BANNER BANNER CLICCABILE CON ANCORA #MEETUP -->
+    <a href="#meetup" class="block bg-[#f9bb0b] hover:bg-[#e0a80a] transition-colors text-gray-900 py-4 px-4 text-center font-bold border-b border-gray-200">
       <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-6 text-sm md:text-base">
         <span class="flex items-center gap-2">
           📍 <span>La Muffetteria (Riano)</span>
@@ -113,7 +113,7 @@
           🗓️ <span>Tutti i sabati dalle 15:30 alle 19:30</span>
         </span>
       </div>
-    </section>
+    </a>
 
     <!-- SEZIONE 1: CHI SIAMO -->
     <section id="chi-siamo" class="py-16 bg-white">
@@ -124,16 +124,16 @@
               Il Progetto
             </span>
             <h2 class="text-3xl md:text-5xl font-black text-gray-900 mb-6 leading-tight">
-              Dal Digitale al Tavolo Da Gioco
+              Cos'è Mala Zone?
             </h2>
             <p class="text-gray-600 text-base md:text-lg mb-4 leading-relaxed">
-              Mala Zone nasce per ritrovare il valore del gioco dal vivo: meno schermi, più carte in mano, dadi sul tavolo e chiacchiere di persona.
+              Mala Zone è un'associazione ricreativa nata per unire gli appassionati di giochi di carte collezionabili (TCG), giochi di ruolo, videogame e cultura pop.
             </p>
             <p class="text-gray-600 text-base md:text-lg mb-8 leading-relaxed">
-              Usiamo il sito e i canali social per coordinarci, ma il cuore del progetto sono i nostri appuntamenti dal vivo per scambiare carte, sfidarsi in torneo o iniziare nuove campagne.
+              Un punto di ritrovo aperto a tutti dove condividere la propria passione, partecipare a tornei e trovare nuove persone con cui giocare.
             </p>
-            <a href="#contatti" class="btn btn-primary btn-md">
-              Unisciti alla Community
+            <a href="chi-siamo.html" class="btn btn-primary btn-md">
+              Scopri di più
             </a>
           </div>
 
@@ -153,10 +153,10 @@
               <h3 class="font-bold text-lg text-gray-900 mb-1">Gaming & Console</h3>
               <p class="text-gray-500 text-sm">Tornei videoludici e serate multiplayer.</p>
             </div>
-            <div class="p-6 bg-gray-50 rounded-2xl border border-gray-100 border-l-4 border-l-[#d32436]">
+            <div class="p-6 bg-gray-50 rounded-2xl border border-gray-100">
               <div class="text-3xl mb-3">📍</div>
-              <h3 class="font-bold text-lg text-gray-900 mb-1">Meetup del Sabato</h3>
-              <p class="text-gray-500 text-sm font-semibold">Ogni sabato 15:30 - 19:30 a La Muffetteria.</p>
+              <h3 class="font-bold text-lg text-gray-900 mb-1">Meetup Settimanali</h3>
+              <p class="text-gray-500 text-sm">Ritrovi fissi per giocare e stare insieme.</p>
             </div>
           </div>
         </div>
@@ -190,15 +190,78 @@
       </div>
     </section>
 
-    <!-- SEZIONE 3: CONTATTI E DOVE SIAMO -->
-    <section id="contatti" class="py-16 bg-white">
+    <!-- SEZIONE 3: DOVE SIAMO / MEETUP (Mappa e Dettagli Sede) -->
+    <section id="meetup" class="py-16 bg-white">
+      <div class="max-w-6xl mx-auto px-4 md:px-8">
+        <div class="text-center mb-12">
+          <span class="text-xs md:text-sm font-bold tracking-widest text-[#d32436] uppercase mb-2 block">
+            Sede e Incontri
+          </span>
+          <h2 class="text-3xl md:text-4xl font-black text-gray-900 mb-4">I Nostri Meetup Settimanali</h2>
+          <p class="text-gray-600 max-w-2xl mx-auto">
+            Ci ritroviamo ogni settimana per giocare, fare scambi e passare un pomeriggio insieme. L'ingresso è aperto a tutti!
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+          
+          <!-- INFO LOCALE -->
+          <div class="bg-gray-50 p-8 rounded-3xl border border-gray-100 flex flex-col justify-between">
+            <div>
+              <div class="inline-block bg-[#f9bb0b] text-gray-900 font-bold text-xs uppercase px-3 py-1 rounded-full mb-4">
+                Punto di Ritrovo
+              </div>
+              <h3 class="text-2xl md:text-3xl font-black text-gray-900 mb-3">La Muffetteria (Riano)</h3>
+              <p class="text-gray-600 mb-6 leading-relaxed">
+                Un ambiente accogliente con tavoli spaziosi, cibo, bevande e un'atmosfera perfetta per le nostre partite di carte e sessioni di gioco.
+              </p>
+              
+              <ul class="space-y-4 mb-8">
+                <li class="flex items-center gap-3 text-gray-700 font-medium">
+                  <span class="text-xl">🗓️</span>
+                  <span><strong>Quando:</strong> Tutti i sabati pomeridiani</span>
+                </li>
+                <li class="flex items-center gap-3 text-gray-700 font-medium">
+                  <span class="text-xl">⏰</span>
+                  <span><strong>Orario:</strong> Dalle 15:30 alle 19:30</span>
+                </li>
+                <li class="flex items-center gap-3 text-gray-700 font-medium">
+                  <span class="text-xl">📍</span>
+                  <span><strong>Dove:</strong> Via Rianese, Riano (RM)</span>
+                </li>
+              </ul>
+            </div>
+
+            <a href="https://maps.google.com" target="_blank" rel="noopener" class="btn btn-primary btn-md w-full sm:w-auto">
+              Apri indicazioni stradali
+            </a>
+          </div>
+
+          <!-- MAPPA GOOGLE INTEGRATA -->
+          <div class="w-full h-[350px] lg:h-auto rounded-3xl overflow-hidden border border-gray-200 shadow-sm min-h-[300px]">
+            <iframe 
+              title="Mappa La Muffetteria Riano"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2963.265147823315!2d12.5135111!3d42.0911!2m3!1f0!2f0!3f0!2m3!1i1024!2i768!4f13.1!3m3!1m2!1s0x132f63810145244d%3A0x8e82a392815c48b!2sLa%20Muffetteria!5e0!3m2!1sit!2sit!4v1700000000000!5m2!1sit!2sit" 
+              class="w-full h-full border-0" 
+              allowfullscreen="" 
+              loading="lazy" 
+              referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SEZIONE 4: CONTATTI -->
+    <section id="contatti" class="py-16 bg-white border-t border-gray-100">
       <div class="max-w-4xl mx-auto px-4 text-center bg-[#d32436] text-white rounded-3xl p-8 md:p-12 shadow-xl">
-        <h2 class="text-3xl md:text-5xl font-black mb-4">Ci vediamo di persona!</h2>
+        <h2 class="text-3xl md:text-5xl font-black mb-4">Vuoi Giocare Con Noi?</h2>
         <p class="text-base md:text-lg opacity-90 max-w-xl mx-auto mb-6">
-          Siamo a <strong>La Muffetteria (Riano)</strong> tutti i <strong>sabati dalle 15:30 alle 19:30</strong>.
+          Vieni a trovarci al prossimo meetup settimanale o contattaci per maggiori informazioni sulle tessere e i tavoli di gioco.
         </p>
         <p class="text-sm md:text-base opacity-80 max-w-md mx-auto mb-8">
-          Entra nella nostra community WhatsApp o scrivici su Instagram per concordare le tue prime partite o scambiare carte con noi.
+          Entra nel nostro gruppo WhatsApp o scrivici su Instagram per organizzare le prime partite.
         </p>
         
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
