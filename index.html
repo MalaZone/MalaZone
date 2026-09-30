@@ -53,13 +53,14 @@
 
   </header>
 
-  <!-- CAROSELLO FULL-WIDTH ATTACCATO ALLA NAVBAR -->
+  <!-- CAROSELLO FULL-WIDTH CONTINUO -->
   <main class="w-full flex-grow">
-    <section class="w-full">
-      <div class="carousel w-full h-[480px] md:h-[550px]">
+    <section class="w-full overflow-hidden">
+      <!-- Container con transizione CSS personalizzata -->
+      <div id="carousel-track" class="flex w-full h-[480px] md:h-[550px] transition-transform duration-700 ease-in-out">
         
         <!-- SLIDE 1: GCC -->
-        <div id="slide1" class="carousel-item relative w-full">
+        <div class="carousel-slide min-w-full h-full relative flex-shrink-0">
           <img src="media/gcc.jpg" class="w-full h-full object-cover brightness-50" alt="GCC e Carte" />
           <div class="absolute flex flex-col justify-center items-center inset-0 text-white text-center p-6 bg-black/40">
             <h2 class="text-3xl md:text-6xl font-black mb-3">GCC & Pokémon TCG</h2>
@@ -69,7 +70,7 @@
         </div>
 
         <!-- SLIDE 2: D&D -->
-        <div id="slide2" class="carousel-item relative w-full">
+        <div class="carousel-slide min-w-full h-full relative flex-shrink-0">
           <img src="media/dnd.jpg" class="w-full h-full object-cover brightness-50" alt="Dungeons and Dragons" />
           <div class="absolute flex flex-col justify-center items-center inset-0 text-white text-center p-6 bg-black/40">
             <h2 class="text-3xl md:text-6xl font-black mb-3">Dungeons & Dragons</h2>
@@ -79,7 +80,7 @@
         </div>
 
         <!-- SLIDE 3: Community -->
-        <div id="slide3" class="carousel-item relative w-full">
+        <div class="carousel-slide min-w-full h-full relative flex-shrink-0">
           <img src="media/community.jpg" class="w-full h-full object-cover brightness-50" alt="Community Mala Zone" />
           <div class="absolute flex flex-col justify-center items-center inset-0 text-white text-center p-6 bg-black/40">
             <h2 class="text-3xl md:text-6xl font-black mb-3">Community & Meetup</h2>
