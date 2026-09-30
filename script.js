@@ -1,9 +1,34 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const track = document.getElementById('carousel-track');
-  const originalSlides = document.querySelectorAll('.carousel-slide');
+  // 1. CARICAMENTO COMPONENTI DINAMICI (Navbar, Footer, Sezioni)
+  const includes = document.querySelectorAll('[data-include]');
   
-  if (!track || originalSlides.length === 0) return;
+  const loadComponents = Array.from(includes).map(el => {
+    const file = el.getAttribute('data-include');
+    return fetch(file)
+      .then(response => {
+        if (!response.ok) throw new Error(`Errore caricamento ${file}`);
+        return response.text();
+      })
+      .then(data => {
+        el.innerHTML = data;
+      })
+      .catch(err => console.error(err));
+  });
 
+  // 2. INIZIALIZZAZIONE SLIDER (dopo che l'HTML principale è pronto)
+  Promise.all(loadComponents).then(() => {
+    initCarousel();
+  });
+});
+
+function initCarousel() {
+  const track = document.getElementById('carousel-track');
+  if (!track) return;
+
+  const originalSlides = track.querySelectorAll('.carousel-slide');
+  if (originalSlides.length === 0) return;
+
+  // Clona la prima slide per il loop continuo
   const firstSlideClone = originalSlides[0].cloneNode(true);
   track.appendChild(firstSlideClone);
 
@@ -13,7 +38,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function moveToNextSlide() {
     currentIndex++;
-    
     track.style.transition = 'transform 0.7s ease-in-out';
     track.style.transform = `translateX(-${currentIndex * 100}%)`;
 
@@ -23,7 +47,6 @@ document.addEventListener('DOMContentLoaded', () => {
         currentIndex = 0;
         track.style.transform = 'translateX(0%)';
         
-        // Forza il browser a registrare il reset prima di riattivare le transizioni
         requestAnimationFrame(() => {
           requestAnimationFrame(() => {});
         });
@@ -37,4 +60,4 @@ document.addEventListener('DOMContentLoaded', () => {
   track.addEventListener('mouseleave', () => {
     slideInterval = setInterval(moveToNextSlide, intervalTime);
   });
-});
+}
