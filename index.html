@@ -10,83 +10,106 @@
 </head>
 <body class="min-h-screen bg-base-300 text-base-content flex flex-col justify-between">
 
+
   <!-- NAVBAR -->
-  <!-- NAVBAR -->
-<header class="navbar bg-base-100 shadow-lg px-4 lg:px-8 sticky top-0 z-50">
-  <!-- Logo a sinistra -->
+<!-- NAVBAR -->
+<header class="navbar bg-white text-base-content shadow-md px-4 lg:px-8 sticky top-0 z-50">
+  
+  <!-- LOGO A SINISTRA -->
   <div class="navbar-start">
-    <div class="dropdown lg:hidden">
-      <!-- Tasto Hamburger per Mobile -->
-      <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" />
-        </svg>
-      </div>
-      <!-- Menu Dropdown Mobile -->
-      <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 gap-1">
-        <li><a href="#chi-siamo">Chi siamo</a></li>
-        <li><a href="#eventi">Eventi</a></li>
-        <li><a href="#diventa-socio">Diventa socio</a></li>
-        <li><a href="#social">Social</a></li>
-        <li><a href="#contatti">Contatti</a></li>
-      </ul>
-    </div>
-    
-    <!-- Logo / Nome dell'associazione -->
     <a href="#" class="btn btn-ghost p-1 flex items-center">
-  <img src="media/logo.png" alt="Mala Zone Logo" class="h-10 w-auto object-contain" />
-</a>
+      <img src="media/logo.png" alt="Mala Zone Logo" class="h-10 w-auto object-contain" />
+    </a>
   </div>
 
-
-  <!-- Link del menu a destra (Desktop) -->
-  <div class="navbar-end hidden lg:flex">
-    <ul class="menu menu-horizontal px-1 gap-1 font-medium">
+  <!-- MENU DESKTOP (AL CENTRO / DESTRA) -->
+  <div class="navbar-center hidden lg:flex">
+    <ul class="menu menu-horizontal px-1 font-medium gap-2">
       <li><a href="#chi-siamo">Chi siamo</a></li>
       <li><a href="#eventi">Eventi</a></li>
       <li><a href="#social">Social</a></li>
       <li><a href="#contatti">Contatti</a></li>
     </ul>
-    <!-- Tasto CTA evidenziato -->
-    <a href="#diventa-socio" class="btn btn-primary btn-sm ml-4">Diventa socio</a>
   </div>
+
+  <!-- DESTRA: PULSANTE DESKTOP + HAMBURGER MOBILE -->
+  <div class="navbar-end">
+    <!-- Tasto CTA visibile solo su Desktop -->
+    <a href="#diventa-socio" class="btn btn-primary btn-sm hidden lg:inline-flex">Diventa socio</a>
+
+    <!-- HAMBURGER MENU A DESTRA (Solo Mobile) -->
+    <div class="dropdown dropdown-end lg:hidden">
+      <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </div>
+      <!-- Menu Dropdown Mobile -->
+      <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-3 shadow-lg bg-white rounded-box w-56 gap-2">
+        <li><a href="#chi-siamo">Chi siamo</a></li>
+        <li><a href="#eventi">Eventi</a></li>
+        <li><a href="#social">Social</a></li>
+        <li><a href="#contatti">Contatti</a></li>
+        <div class="divider my-1"></div>
+        <li><a href="#diventa-socio" class="btn btn-primary btn-sm text-white">Diventa socio</a></li>
+      </ul>
+    </div>
+  </div>
+
 </header>
 
-  <!-- HERO SECTION -->
-  <main class="container mx-auto px-4 py-12 flex-grow">
-    <section class="hero bg-base-200 rounded-box p-8 my-6 text-center shadow-md">
-      <div class="max-w-md mx-auto">
-        <h1 class="text-4xl font-extrabold mb-4">Mala Zone</h1>
-        <p class="py-2 text-base-content/80">
-          Benvenuti nel nostro hub ufficiale. Qui trovi tutte le iniziative, i contatti e i canali del progetto.
-        </p>
-        <a href="#chi-siamo" class="btn btn-outline btn-accent mt-4">Scopri di più</a>
-      </div>
-    </section>
-
-    <!-- SEZIONE ABOUT -->
-    <section id="chi-siamo" class="my-12">
-      <h2 class="text-2xl font-bold text-center mb-6">Il Progetto</h2>
-      <div class="card bg-base-100 shadow-xl">
-        <div class="card-body">
-          <p class="text-center">Inserisci qui un paio di righe descrittive sull'associazione o sull'iniziativa.</p>
+  <!-- HERO / CAROSELLO -->
+<section class="relative w-full bg-base-200 py-8">
+  <div class="max-w-6xl mx-auto px-4">
+    
+    <div class="carousel w-full rounded-box shadow-2xl h-[400px]">
+      
+      <!-- SLIDE 1: GCC -->
+      <div id="slide1" class="carousel-item relative w-full">
+        <img src="media/gcc.jpg" class="w-full object-cover brightness-50" alt="GCC e Carte" />
+        <div class="absolute flex flex-col justify-center items-center inset-0 text-white text-center p-4 bg-black/40">
+          <h2 class="text-3xl md:text-5xl font-black mb-2">GCC & Pokémon TCG</h2>
+          <p class="text-lg max-w-md">Scambi, tornei e community per tutti gli appassionati di carte collezionabili.</p>
+          <a href="#eventi" class="btn btn-primary mt-4">Scopri gli eventi</a>
+        </div>
+        <div class="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
+          <a href="#slide3" class="btn btn-circle btn-sm">❮</a>
+          <a href="#slide2" class="btn btn-circle btn-sm">❯</a>
         </div>
       </div>
-    </section>
 
-    <!-- SEZIONE LINK (HUB) -->
-    <section id="link" class="my-12 max-w-lg mx-auto">
-      <h2 class="text-2xl font-bold text-center mb-6">Canali & Link</h2>
-      <div class="flex flex-col gap-4">
-        <a href="https://instagram.com" target="_blank" class="btn btn-primary btn-block text-lg">
-          Instagram
-        </a>
-        <a href="mailto:info@example.com" class="btn btn-secondary btn-block text-lg">
-          Email / Contatti
-        </a>
+      <!-- SLIDE 2: D&D -->
+      <div id="slide2" class="carousel-item relative w-full">
+        <img src="media/dnd.jpg" class="w-full object-cover brightness-50" alt="Dungeons and Dragons" />
+        <div class="absolute flex flex-col justify-center items-center inset-0 text-white text-center p-4 bg-black/40">
+          <h2 class="text-3xl md:text-5xl font-black mb-2">Dungeons & Dragons</h2>
+          <p class="text-lg max-w-md">Sessioni di gioco di ruolo, campagne epiche e tavoli per principianti ed esperti.</p>
+          <a href="#contatti" class="btn btn-secondary mt-4">Unisciti a un tavolo</a>
+        </div>
+        <div class="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
+          <a href="#slide1" class="btn btn-circle btn-sm">❮</a>
+          <a href="#slide3" class="btn btn-circle btn-sm">❯</a>
+        </div>
       </div>
-    </section>
-  </main>
+
+      <!-- SLIDE 3: Community & Meetup -->
+      <div id="slide3" class="carousel-item relative w-full">
+        <img src="media/community.jpg" class="w-full object-cover brightness-50" alt="Community Mala Zone" />
+        <div class="absolute flex flex-col justify-center items-center inset-0 text-white text-center p-4 bg-black/40">
+          <h2 class="text-3xl md:text-5xl font-black mb-2">Community & Meetup</h2>
+          <p class="text-lg max-w-md">I nostri ritrovi settimanali per giocare, conoscersi e stare insieme.</p>
+          <a href="#diventa-socio" class="btn btn-accent mt-4">Diventa Socio</a>
+        </div>
+        <div class="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
+          <a href="#slide2" class="btn btn-circle btn-sm">❮</a>
+          <a href="#slide1" class="btn btn-circle btn-sm">❯</a>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
 
   <!-- FOOTER -->
   <footer class="footer footer-center p-4 bg-base-100 text-base-content">
