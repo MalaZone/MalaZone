@@ -22,15 +22,17 @@
       </a>
     </div>
 
+    <!-- MENU DESKTOP -->
     <div class="navbar-center hidden lg:flex">
       <ul class="menu menu-horizontal px-1 font-medium gap-2">
         <li><a href="#chi-siamo">Chi siamo</a></li>
         <li><a href="#eventi">Eventi</a></li>
-        <li><a href="#meetup">Dove trovarci</a></li>
+        <li><a href="#social">Social</a></li>
         <li><a href="#contatti">Contatti</a></li>
       </ul>
     </div>
 
+    <!-- DESTRA: PULSANTE DESKTOP + HAMBURGER MOBILE -->
     <div class="navbar-end">
       <a href="#contatti" class="btn btn-primary btn-sm hidden lg:inline-flex">Diventa socio</a>
 
@@ -43,7 +45,7 @@
         <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-3 shadow-lg bg-white rounded-box w-56 gap-2">
           <li><a href="#chi-siamo">Chi siamo</a></li>
           <li><a href="#eventi">Eventi</a></li>
-          <li><a href="#meetup">Dove trovarci</a></li>
+          <li><a href="#social">Social</a></li>
           <li><a href="#contatti">Contatti</a></li>
           <div class="divider my-1"></div>
           <li><a href="#contatti" class="btn btn-primary btn-sm text-white">Diventa socio</a></li>
@@ -102,7 +104,7 @@
       </div>
     </section>
 
-    <!-- BANNER BANNER CLICCABILE CON ANCORA #MEETUP -->
+    <!-- BANNER CLICCABILE ANCORATO A #MEETUP -->
     <a href="#meetup" class="block bg-[#f9bb0b] hover:bg-[#e0a80a] transition-colors text-gray-900 py-4 px-4 text-center font-bold border-b border-gray-200">
       <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-6 text-sm md:text-base">
         <span class="flex items-center gap-2">
@@ -227,12 +229,13 @@
                 </li>
                 <li class="flex items-center gap-3 text-gray-700 font-medium">
                   <span class="text-xl">📍</span>
-                  <span><strong>Dove:</strong> Via Rianese, Riano (RM)</span>
+                  <span><strong>Dove:</strong> Via Cerchiara 1, Riano (RM)</span>
                 </li>
               </ul>
             </div>
 
-            <a href="https://maps.google.com" target="_blank" rel="noopener" class="btn btn-primary btn-md w-full sm:w-auto">
+            <!-- LINK MAPS CON DESTINAZIONE PREIMPOSTATA -->
+            <a href="https://www.google.com/maps/dir/?api=1&destination=La+Muffetteria+Via+Cerchiara+1+Riano" target="_blank" rel="noopener" class="btn btn-primary btn-md w-full sm:w-auto">
               Apri indicazioni stradali
             </a>
           </div>
@@ -268,7 +271,7 @@
           <a href="#" class="btn btn-secondary btn-lg border-none text-black font-bold">
             Entra nel gruppo WhatsApp
           </a>
-          <a href="#" class="btn btn-outline text-white hover:bg-white hover:text-[#d32436] btn-lg border-white">
+          <a href="#" class="btn btn-outline text-[#f9bb0b] hover:bg-[#f9bb0b] hover:text-black btn-lg border-[#f9bb0b]">
             Seguici su Instagram
           </a>
         </div>
@@ -278,7 +281,7 @@
   </main>
 
   <!-- FOOTER -->
-  <footer class="footer footer-center p-6 bg-white border-t border-gray-100 text-base-content mt-12">
+  <footer id="social" class="footer footer-center p-6 bg-white border-t border-gray-100 text-base-content mt-12">
     <aside>
       <p>© 2026 Mala Zone - Tutti i diritti riservati</p>
     </aside>
