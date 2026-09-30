@@ -1,0 +1,1 @@
+console.log("Mala Zone pronto!");
