@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="it" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Evento di Halloween - Mala Zone</title>
+  
+  <!-- CDN Tailwind + DaisyUI -->
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- CSS Custom per Colori Brand -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="min-h-screen bg-white text-base-content flex flex-col justify-between">
+
+  <!-- NAVBAR DINAMICA -->
+  <custom-navbar></custom-navbar>
+
+  <!-- CONTENUTO PRINCIPALE -->
+  <main class="w-full flex-grow overflow-x-hidden">
+    
+    <!-- BREADCRUMB / TORNA INDIETRO -->
+    <div class="max-w-6xl mx-auto px-4 md:px-8 pt-8">
+      <a href="eventi.html" class="inline-flex items-center gap-2 text-sm font-bold text-gray-500 hover:text-[#d32436] transition-colors">
+        ← Torna a tutti gli eventi
+      </a>
+    </div>
+
+    <!-- SEZIONE DETTAGLIO EVENTO -->
+    <section class="py-8 md:py-12 bg-white">
+      <div class="max-w-6xl mx-auto px-4 md:px-8 space-y-12">
+        
+        <!-- 1. SOPRA: LOCANDINA (SINISTRA) + TESTO FINO A LOCATION (DESTRA) -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          
+          <!-- SINISTRA: LOCANDINA -->
+          <div class="lg:col-span-5 w-full">
+            <div class="rounded-3xl overflow-hidden shadow-xl border border-gray-100 bg-black">
+              <img 
+                src="media/halloween/halloween45.png" 
+                alt="Locandina Evento di Halloween Mala Zone" 
+                class="w-full h-auto object-contain block" 
+              />
+            </div>
+          </div>
+
+          <!-- DESTRA: TITOLO, DESK E BOX FINO A LOCATION -->
+          <div class="lg:col-span-7 flex flex-col justify-center">
+            <div class="flex flex-wrap items-center gap-2 mb-3">
+              <span class="bg-[#d32436] text-white font-bold text-xs uppercase px-3 py-1 rounded-full">
+                Special Event
+              </span>
+              <span class="bg-[#f9bb0b] text-gray-900 font-bold text-xs uppercase px-3 py-1 rounded-full">
+                31 Ottobre
+              </span>
+            </div>
+
+            <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-gray-900 mb-4 leading-tight">
+              Evento di Halloween Mala Zone
+            </h1>
+
+            <p class="text-gray-600 text-base md:text-lg mb-6 leading-relaxed">
+              Festeggia la notte di Halloween insieme alla community di Mala Zone! Un intero pomeriggio dedicato al gioco, tornei speciali, sfilata in maschera e tanto divertimento.
+            </p>
+
+            <!-- COMPATTO BOX INFO FINO A LOCATION -->
+            <div class="bg-gray-50 p-6 rounded-2xl border border-gray-100 space-y-3">
+              <div class="flex items-center gap-3 text-gray-800 font-semibold text-sm md:text-base">
+                <span class="text-xl">🗓️</span>
+                <span><strong>Data:</strong> Martedì 31 Ottobre</span>
+              </div>
+              <div class="flex items-center gap-3 text-gray-800 font-semibold text-sm md:text-base">
+                <span class="text-xl">⏰</span>
+                <span><strong>Orario:</strong> Dalle 15:00 alle 21:00</span>
+              </div>
+              <div class="flex items-center gap-3 text-gray-800 font-semibold text-sm md:text-base">
+                <span class="text-xl">📍</span>
+                <span><strong>Location:</strong> La Muffetteria (Via Cerchiara 1, Riano)</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- 2. SOTTO: ATTIVITÀ IN PROGRAMMA (SINISTRA) + FORMULE INGRESSO (DESTRA) -->
+        <div class="pt-8 border-t border-gray-100">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+            
+            <!-- ATTIVITÀ IN PROGRAMMA (SINISTRA) -->
+            <div>
+              <h2 class="text-2xl font-bold text-gray-900 mb-4">Attività in Programma:</h2>
+              <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <li class="p-4 bg-gray-50 rounded-2xl border border-gray-100 text-sm font-semibold text-gray-800 flex items-center gap-3">
+                  <span class="text-xl">⚔️</span> Torneo di Magic
+                </li>
+                <li class="p-4 bg-gray-50 rounded-2xl border border-gray-100 text-sm font-semibold text-gray-800 flex items-center gap-3">
+                  <span class="text-xl">🎭</span> Gara costumi
+                </li>
+                <li class="p-4 bg-gray-50 rounded-2xl border border-gray-100 text-sm font-semibold text-gray-800 flex items-center gap-3">
+                  <span class="text-xl">🎒</span> Pesca Pokémon
+                </li>
+                <li class="p-4 bg-gray-50 rounded-2xl border border-gray-100 text-sm font-semibold text-gray-800 flex items-center gap-3">
+                  <span class="text-xl">🐉</span> One-Shot D&D
+                </li>
+              </ul>
+            </div>
+
+            <!-- FORMULE INGRESSO (DESTRA) -->
+            <div>
+              <h2 class="text-2xl font-bold text-gray-900 mb-4">Formule d'Ingresso:</h2>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="p-5 bg-white rounded-2xl border-2 border-[#d32436] shadow-sm flex flex-col justify-between">
+                  <div>
+                    <div class="text-3xl font-black text-[#d32436] mb-1">10€</div>
+                    <div class="font-bold text-gray-900 mb-1">Ingresso Base</div>
+                    <p class="text-xs text-gray-500">Consumazione + Buffet + Pesca Pokémon inclusa.</p>
+                  </div>
+                </div>
+
+                <div class="p-5 bg-white rounded-2xl border-2 border-[#d32436] shadow-sm flex flex-col justify-between">
+                  <div>
+                    <div class="text-3xl font-black text-[#d32436] mb-1">15€</div>
+                    <div class="font-bold text-gray-900 mb-1">Ingresso + Torneo</div>
+                    <p class="text-xs text-gray-500">Consumazione + Buffet + Iscrizione al Torneo MTG.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 3. ANCORA PIÙ SOTTO AL CENTRO: MAPPA SEDE E PRENOTA SU WHATSAPP -->
+          <div class="pt-6 border-t border-gray-100 flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <a href="https://maps.app.goo.gl/9EVYemJrGzczfpBx5" target="_blank" rel="noopener" class="btn btn-outline border-gray-300 btn-md w-full sm:w-auto">
+              📍 Mappa Sede
+            </a>
+            <a href="contatti.html" class="btn btn-primary btn-md w-full sm:w-80">
+              Prenota o Chiedi Info su WhatsApp
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER DINAMICO -->
+  <custom-footer></custom-footer>
+
+  <!-- SCRIPT JS ESTERNO -->
+  <script src="script.js"></script>
+
+</body>
+</html>

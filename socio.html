@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="it" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diventa Socio - Mala Zone</title>
+  
+  <!-- CDN Tailwind + DaisyUI -->
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- CSS Custom per Colori Brand -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="min-h-screen bg-white text-base-content flex flex-col justify-between">
+
+  <!-- NAVBAR DINAMICA -->
+  <custom-navbar></custom-navbar>
+
+  <!-- CONTENUTO PRINCIPALE -->
+  <main class="w-full flex-grow overflow-x-hidden">
+    
+    <!-- HERO DIVENTA SOCIO (Immagine a tutto schermo) -->
+    <section class="w-full h-[350px] sm:h-[450px] relative overflow-hidden flex items-center justify-center">
+      <img src="media/slider/community.jpg" class="w-full h-full object-cover brightness-50 absolute inset-0" alt="Diventa Socio Mala Zone" />
+      <div class="relative z-10 text-white text-center p-4 md:p-6 max-w-3xl">
+        <h1 class="text-3xl sm:text-5xl md:text-6xl font-black mb-4">Diventa Socio</h1>
+        <p class="text-base sm:text-lg md:text-xl opacity-90 leading-relaxed">
+          Unisciti all'associazione Mala Zone. Compila il modulo per richiedere la tessera e accedere a tutti i nostri eventi, tornei e tavoli di gioco.
+        </p>
+      </div>
+    </section>
+
+    <!-- FORM RICHIEDI TESSERA -->
+    <section class="py-12 bg-gray-50 border-t border-gray-100">
+      <div class="max-w-3xl mx-auto px-4 md:px-8">
+        <div class="bg-white p-8 md:p-10 rounded-3xl border border-gray-100 shadow-sm">
+          
+          <div class="text-center mb-8">
+            <span class="text-xs md:text-sm font-bold tracking-widest text-[#d32436] uppercase mb-2 block">
+              Modulo d'Iscrizione
+            </span>
+            <h2 class="text-2xl md:text-3xl font-black text-gray-900 mb-2">Richiedi la Tua Tessera</h2>
+            <p class="text-gray-600 text-sm md:text-base mb-2">
+              Compila i dati richiesti per l'iscrizione al libro soci. Ti ricontatteremo via WhatsApp o email per la conferma e il ritiro della tessera.
+            </p>
+            <p class="text-xs text-gray-400 font-medium">
+              * I campi contrassegnati da un asterisco sono obbligatori
+            </p>
+          </div>
+
+          <form action="https://formspree.io/f/malazoneclan@gmail.com" method="POST" class="space-y-6">
+            
+            <!-- ANAGRAFICA -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div class="form-control">
+                <label class="label font-bold text-gray-700 text-sm">
+                  <span>Nome e Cognome *</span>
+                </label>
+                <input type="text" name="nome_cognome" required placeholder="Es. Mario Rossi" class="input input-bordered w-full rounded-xl focus:border-[#d32436] focus:outline-none" />
+              </div>
+
+              <div class="form-control">
+                <label class="label font-bold text-gray-700 text-sm">
+                  <span>Codice Fiscale *</span>
+                </label>
+                <input type="text" name="codice_fiscale" required placeholder="Es. RSSMRA80A01H501U" class="input input-bordered w-full rounded-xl uppercase focus:border-[#d32436] focus:outline-none" />
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div class="form-control">
+                <label class="label font-bold text-gray-700 text-sm">
+                  <span>Data di Nascita *</span>
+                </label>
+                <input type="date" name="data_nascita" required class="input input-bordered w-full rounded-xl focus:border-[#d32436] focus:outline-none" />
+              </div>
+
+              <div class="form-control">
+                <label class="label font-bold text-gray-700 text-sm">
+                  <span>Luogo di Nascita *</span>
+                </label>
+                <input type="text" name="luogo_nascita" required placeholder="Es. Roma (RM)" class="input input-bordered w-full rounded-xl focus:border-[#d32436] focus:outline-none" />
+              </div>
+            </div>
+
+            <!-- CONTATTI -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div class="form-control">
+                <label class="label font-bold text-gray-700 text-sm">
+                  <span>Email *</span>
+                </label>
+                <input type="email" name="email" required placeholder="latuaemail@esempio.it" class="input input-bordered w-full rounded-xl focus:border-[#d32436] focus:outline-none" />
+              </div>
+
+              <div class="form-control">
+                <label class="label font-bold text-gray-700 text-sm">
+                  <span>Cellulare / WhatsApp *</span>
+                </label>
+                <input type="tel" name="telefono" required placeholder="Es. 333 1234567" class="input input-bordered w-full rounded-xl focus:border-[#d32436] focus:outline-none" />
+              </div>
+            </div>
+
+            <!-- RESIDENZA -->
+            <div class="form-control">
+              <label class="label font-bold text-gray-700 text-sm">
+                <span>Indirizzo di Residenza *</span>
+              </label>
+              <input type="text" name="residenza" required placeholder="Es. Via Roma 10, Riano (RM)" class="input input-bordered w-full rounded-xl focus:border-[#d32436] focus:outline-none" />
+            </div>
+
+            <!-- MODALITÀ DI PAGAMENTO -->
+            <div class="form-control">
+              <label class="label font-bold text-gray-700 text-sm">
+                <span>Come preferisci versare la quota associativa? *</span>
+              </label>
+              <select name="modalita_pagamento" required class="select select-bordered w-full rounded-xl focus:border-[#d32436] focus:outline-none">
+                <option value="" disabled selected>Seleziona un'opzione</option>
+                <option value="In sede">Pagamento di persona al primo meetup (La Muffetteria)</option>
+                <option value="Bonifico">Bonifico Bancario (ti invieremo l'IBAN via email)</option>
+              </select>
+            </div>
+
+            <!-- INTERESSI (FACOLTATIVO) -->
+            <div class="form-control">
+              <label class="label font-bold text-gray-700 text-sm">
+                <span>Quali attività ti interessano di più? (Facoltativo)</span>
+              </label>
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-sm">
+                <label class="flex items-center gap-2 cursor-pointer">
+                  <input type="checkbox" name="interessi[]" value="TCG / Carte" class="checkbox checkbox-primary checkbox-sm" />
+                  <span>TCG / Carte</span>
+                </label>
+                <label class="flex items-center gap-2 cursor-pointer">
+                  <input type="checkbox" name="interessi[]" value="D&D / GDR" class="checkbox checkbox-primary checkbox-sm" />
+                  <span>D&D / GDR</span>
+                </label>
+                <label class="flex items-center gap-2 cursor-pointer">
+                  <input type="checkbox" name="interessi[]" value="Gaming & Console" class="checkbox checkbox-primary checkbox-sm" />
+                  <span>Gaming & Console</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- CONSENSI STATUTO & PRIVACY -->
+            <div class="space-y-3 pt-4 border-t border-gray-100">
+              <label class="flex items-start gap-3 cursor-pointer text-xs text-gray-600">
+                <input type="checkbox" required class="checkbox checkbox-primary checkbox-xs mt-0.5" />
+                <span>Dichiaro di aver preso visione dello Statuto dell'Associazione Mala Zone e di accettarne il regolamento interno. *</span>
+              </label>
+
+              <label class="flex items-start gap-3 cursor-pointer text-xs text-gray-600">
+                <input type="checkbox" required class="checkbox checkbox-primary checkbox-xs mt-0.5" />
+                <span>Acconsento al trattamento dei dati personali ai sensi del GDPR (UE 2016/679) per le sole finalità legate al tesseramento associativo. *</span>
+              </label>
+            </div>
+
+            <!-- PULSANTE INVIO -->
+            <button type="submit" class="btn btn-primary btn-lg w-full font-bold">
+              Invia Richiesta Tesseramento
+            </button>
+
+          </form>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER DINAMICO -->
+  <custom-footer></custom-footer>
+
+  <!-- SCRIPT JS ESTERNO -->
+  <script src="script.js"></script>
+
+</body>
+</html>

@@ -18,7 +18,7 @@ class CustomNavbar extends HTMLElement {
         </div>
 
         <div class="navbar-end">
-          <a href="contatti.html" class="btn btn-primary btn-sm hidden lg:inline-flex">Diventa socio</a>
+          <a href="socio.html" class="btn btn-primary btn-sm hidden lg:inline-flex">Diventa socio</a>
 
           <div class="dropdown dropdown-end lg:hidden">
             <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
