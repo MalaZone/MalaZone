@@ -14,40 +14,8 @@
 </head>
 <body class="min-h-screen bg-white text-base-content flex flex-col justify-between">
 
-  <!-- NAVBAR -->
-  <header class="navbar bg-white text-base-content border-b border-gray-100 px-4 lg:px-8 sticky top-0 z-50">
-    <div class="navbar-start">
-      <a href="index.html" class="btn btn-ghost p-1 flex items-center">
-        <img src="media/logo.png" alt="Mala Zone Logo" class="h-10 w-auto object-contain" />
-      </a>
-    </div>
-
-    <!-- MENU DESKTOP -->
-    <div class="navbar-center hidden lg:flex">
-      <ul class="menu menu-horizontal px-1 font-medium gap-2">
-        <li><a href="chi-siamo.html">Chi siamo</a></li>
-        <li><a href="eventi.html">Eventi</a></li>
-        <li><a href="contatti.html">Contatti</a></li>
-      </ul>
-    </div>
-
-    <!-- DESTRA: PULSANTE DESKTOP + HAMBURGER MOBILE -->
-    <div class="navbar-end">
-      <a href="#contatti" class="btn btn-primary btn-sm hidden lg:inline-flex">Diventa socio</a>
-
-      <div class="dropdown dropdown-end lg:hidden">
-        <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-        </div>
-        <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-3 shadow-lg bg-white rounded-box w-56 gap-2">
-          <div class="divider my-1"></div>
-          <li><a href="#contatti" class="btn btn-primary btn-sm text-white">Diventa socio</a></li>
-        </ul>
-      </div>
-    </div>
-  </header>
+  <!-- NAVBAR DINAMICA -->
+  <custom-navbar></custom-navbar>
 
   <!-- CONTENUTO PRINCIPALE -->
   <main class="w-full flex-grow overflow-x-hidden">
@@ -167,17 +135,17 @@
           <div class="bg-white p-8 rounded-2xl border border-gray-100 shadow-sm">
             <h3 class="text-xl font-bold mb-3 text-gray-900">GCC & TCG</h3>
             <p class="text-gray-600 text-sm mb-6">Lega ufficiale, tornei amatoriali e sessioni dedicate allo scambio carte.</p>
-            <a href="#contatti" class="text-[#d32436] font-bold text-sm hover:underline">Vedi eventi TCG →</a>
+            <a href="contatti.html" class="text-[#d32436] font-bold text-sm hover:underline">Vedi eventi TCG →</a>
           </div>
           <div class="bg-white p-8 rounded-2xl border border-gray-100 shadow-sm">
             <h3 class="text-xl font-bold mb-3 text-gray-900">Tavoli D&D</h3>
             <p class="text-gray-600 text-sm mb-6">Campagne continuative e one-shot pensate anche per chi non ha mai giocato.</p>
-            <a href="#contatti" class="text-[#d32436] font-bold text-sm hover:underline">Unisciti a una sessione →</a>
+            <a href="contatti.html" class="text-[#d32436] font-bold text-sm hover:underline">Unisciti a una sessione →</a>
           </div>
           <div class="bg-white p-8 rounded-2xl border border-gray-100 shadow-sm">
             <h3 class="text-xl font-bold mb-3 text-gray-900">Gaming & Console</h3>
             <p class="text-gray-600 text-sm mb-6">Tornei su console, postazioni da gioco libero e serate di sfida multiplayer.</p>
-            <a href="#contatti" class="text-[#d32436] font-bold text-sm hover:underline">Scopri i tornei →</a>
+            <a href="contatti.html" class="text-[#d32436] font-bold text-sm hover:underline">Scopri i tornei →</a>
           </div>
         </div>
       </div>
@@ -225,7 +193,7 @@
               </ul>
             </div>
 
-            <!-- LINK MAPS DIRETTO CON LINK BREVE -->
+            <!-- LINK MAPS DIRETTO -->
             <a href="https://maps.app.goo.gl/9EVYemJrGzczfpBx5" target="_blank" rel="noopener" class="btn btn-primary btn-md w-full sm:w-auto">
               Apri indicazioni stradali
             </a>
@@ -233,7 +201,14 @@
 
           <!-- MAPPA GOOGLE INTEGRATA -->
           <div class="w-full h-[350px] lg:h-auto rounded-3xl overflow-hidden border border-gray-200 shadow-sm min-h-[300px]">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2961.150311499294!2d12.543664399999997!3d42.082828899999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x132f6fe91f0333e3%3A0xc50c7e0ffa88ac16!2sLa%20Muffetteria!5e0!3m2!1sit!2sit!4v1790779545672!5m2!1sit!2sit" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+            <iframe 
+              title="Mappa La Muffetteria Riano"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2961.150311499294!2d12.543664399999997!3d42.082828899999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x132f6fe91f0333e3%3A0xc50c7e0ffa88ac16!2sLa%20Muffetteria!5e0!3m2!1sit!2sit!4v1790779545672!5m2!1sit!2sit" 
+              class="w-full h-full border-0" 
+              allowfullscreen="" 
+              loading="lazy" 
+              referrerpolicy="strict-origin-when-cross-origin">
+            </iframe>
           </div>
 
         </div>
@@ -261,12 +236,8 @@
 
   </main>
 
-  <!-- FOOTER -->
-  <footer id="social" class="footer footer-center p-6 bg-white border-t border-gray-100 text-base-content mt-12">
-    <aside>
-      <p>© 2026 Mala Zone - Tutti i diritti riservati</p>
-    </aside>
-  </footer>
+  <!-- FOOTER DINAMICO -->
+  <custom-footer></custom-footer>
 
   <!-- SCRIPT JS ESTERNO -->
   <script src="script.js"></script>
