@@ -31,7 +31,7 @@ class CustomNavbar extends HTMLElement {
               <li><a href="eventi.html">Eventi</a></li>
               <li><a href="contatti.html">Contatti</a></li>
               <div class="divider my-1"></div>
-              <li><a href="contatti.html" class="btn btn-primary btn-sm text-white">Diventa socio</a></li>
+              <li><a href="socio.html" class="btn btn-primary btn-sm text-white">Diventa socio</a></li>
             </ul>
           </div>
         </div>
