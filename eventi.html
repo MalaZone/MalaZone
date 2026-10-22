@@ -31,7 +31,7 @@
       </div>
     </section>
 
-    <!-- SEZIONE EVENTO SPECIALE (HALLOWEEN) -->
+    <!-- SEZIONE EVENTI IN EVIDENZA (GRIGLIA A 2 CARD) -->
     <section class="py-16 bg-white">
       <div class="max-w-6xl mx-auto px-4 md:px-8">
         
@@ -39,50 +39,91 @@
           <span class="text-xs md:text-sm font-bold tracking-widest text-[#d32436] uppercase mb-2 block">
             In Evidenza
           </span>
-          <h2 class="text-3xl md:text-4xl font-black text-gray-900">Prossimo Evento Speciale</h2>
+          <h2 class="text-3xl md:text-4xl font-black text-gray-900">Prossimi Eventi Speciali</h2>
         </div>
 
-        <!-- CARD EVENTO HALLOWEEN -->
-        <div class="bg-gray-50 rounded-3xl border border-gray-100 overflow-hidden grid grid-cols-1 md:grid-cols-12 gap-0 shadow-sm hover:shadow-md transition-shadow">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
           
-          <!-- ANTEPRIMA LOCANDINA (Puoi sostituire la sorgente con la tua locandina A5 appena pronta) -->
-          <div class="md:col-span-5 relative h-64 md:h-auto bg-gray-200">
-            <img src="media/halloween/halloween45.png" alt="Halloween Special Event" class="w-full h-full object-cover" />
-            <div class="absolute top-4 left-4 bg-[#d32436] text-white font-bold text-xs uppercase px-3 py-1 rounded-full">
-              Special Event
+          <!-- CARD 1: EVENTO HALLOWEEN GENERALE -->
+          <div class="bg-gray-50 rounded-3xl border border-gray-100 overflow-hidden flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow">
+            <div>
+              <div class="relative h-64 sm:h-72 bg-black">
+                <img src="media/halloween/halloween45.png" alt="Mala Zone Halloween Party" class="w-full h-full object-contain" />
+                <div class="absolute top-4 left-4 bg-[#d32436] text-white font-bold text-xs uppercase px-3 py-1 rounded-full">
+                  Special Event
+                </div>
+                <div class="absolute top-4 right-4 bg-[#f9bb0b] text-gray-900 font-bold text-xs uppercase px-3 py-1 rounded-full">
+                  31 Ottobre
+                </div>
+              </div>
+
+              <div class="p-6 sm:p-8">
+                <h3 class="text-2xl font-black text-gray-900 mb-3">
+                  Mala Zone Halloween Party
+                </h3>
+                <p class="text-gray-600 text-sm mb-6 leading-relaxed">
+                  Un intero pomeriggio e serata dedicati al gioco: gara in maschera, pesca Pokémon, one-shot di D&D, buffet e tanto divertimento in community!
+                </p>
+                
+                <ul class="space-y-2 mb-6 text-sm text-gray-700">
+                  <li class="flex items-center gap-2">
+                    <span>🗓️ <strong>Data:</strong> Martedì 31 Ottobre (15:00 - 21:00)</span>
+                  </li>
+                  <li class="flex items-center gap-2">
+                    <span>📍 <strong>Location:</strong> La Muffetteria (Riano)</span>
+                  </li>
+                  <li class="flex items-center gap-2">
+                    <span>🎟️ <strong>Formula:</strong> 10€ / 15€ con Torneo</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="px-6 pb-6 sm:px-8 sm:pb-8">
+              <a href="evento-halloween.html" class="btn btn-primary btn-md w-full font-bold">
+                Scopri il programma completo
+              </a>
             </div>
           </div>
 
-          <!-- DETTAGLI EVENTO -->
-          <div class="md:col-span-7 p-6 sm:p-8 md:p-10 flex flex-col justify-between">
+          <!-- CARD 2: TORNEO DI MAGIC -->
+          <div class="bg-gray-50 rounded-3xl border border-gray-100 overflow-hidden flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow">
             <div>
-              <div class="flex items-center gap-2 text-sm text-[#d32436] font-bold mb-2">
-                <span>🎃 Halloween Night</span>
+              <div class="relative h-64 sm:h-72 bg-black">
+                <img src="media/halloween/torneomagic4-5.png" alt="Torneo Magic Halloween" class="w-full h-full object-contain" />
+                <div class="absolute top-4 left-4 bg-[#d32436] text-white font-bold text-xs uppercase px-3 py-1 rounded-full">
+                  Torneo Ufficiale
+                </div>
+                <div class="absolute top-4 right-4 bg-[#f9bb0b] text-gray-900 font-bold text-xs uppercase px-3 py-1 rounded-full">
+                  31 Ottobre
+                </div>
               </div>
-              <h3 class="text-2xl md:text-3xl font-black text-gray-900 mb-4">
-                Mala Zone Halloween Party
-              </h3>
-              <p class="text-gray-600 text-sm md:text-base mb-6 leading-relaxed">
-                Una serata speciale dedicata al gioco di ruolo, giochi da tavolo a tema horror e tornei dedicati. Prepara la tua scheda o il tuo deck per una notte da brividi!
-              </p>
-              
-              <ul class="space-y-2 mb-8 text-sm text-gray-700">
-                <li class="flex items-center gap-2">
-                  <span>🗓️ <strong>Data:</strong> 31 Ottobre</span>
-                </li>
-                <li class="flex items-center gap-2">
-                  <span>📍 <strong>Location:</strong> La Muffetteria (Via Cerchiara 1, Riano)</span>
-                </li>
-                <li class="flex items-center gap-2">
-                  <span>ℹ️</span>
-                <span>Per le attività è consigliabile la prenotazione, specialmente per il torneo di MTG.</span>
-                </li>
-              </ul>
+
+              <div class="p-6 sm:p-8">
+                <h3 class="text-2xl font-black text-gray-900 mb-3">
+                  Torneo MTG
+                </h3>
+                <p class="text-gray-600 text-sm mb-6 leading-relaxed">
+                  Sfida gli altri giocatori nel torneo speciale di Halloween. Quota iscrizione inclusa nella formula d'ingresso da 15€ con consumazione e buffet.
+                </p>
+                
+                <ul class="space-y-2 mb-6 text-sm text-gray-700">
+                  <li class="flex items-center gap-2">
+                    <span>🗓️ <strong>Data:</strong> Martedì 31 Ottobre (Inizio ore 16:00)</span>
+                  </li>
+                  <li class="flex items-center gap-2">
+                    <span>📍 <strong>Location:</strong> La Muffetteria (Riano)</span>
+                  </li>
+                  <li class="flex items-center gap-2">
+                    <span>⚔️ <strong>Quota:</strong> 15€ (Ingresso + Buffet + Torneo)</span>
+                  </li>
+                </ul>
+              </div>
             </div>
 
-            <div>
-              <a href="evento-halloween.html" class="btn btn-primary btn-md">
-                Scopri i dettagli dell'evento
+            <div class="px-6 pb-6 sm:px-8 sm:pb-8">
+              <a href="torneo-magic.html" class="btn btn-primary btn-md w-full font-bold">
+                Dettagli e Iscrizione Torneo
               </a>
             </div>
           </div>
