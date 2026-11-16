@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="it" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scambi & Mercatino — Mala Zone</title>
+  
+  <!-- CDN Tailwind + DaisyUI -->
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- CSS Custom per Colori Brand -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="min-h-screen bg-white text-base-content flex flex-col justify-between">
+
+  <!-- NAVBAR DINAMICA -->
+  <custom-navbar></custom-navbar>
+
+  <!-- CONTENUTO PRINCIPALE -->
+  <main class="w-full flex-grow">
+
+    <!-- HEADER SEZIONE + BARRA UTENTE -->
+    <section class="bg-gray-50 border-b border-gray-100 py-8 px-4 md:px-8">
+      <div class="max-w-6xl mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+        <div>
+          <span class="text-xs md:text-sm font-bold tracking-widest text-[#d32436] uppercase mb-1 block">
+            Bacheca Community
+          </span>
+          <h1 class="text-3xl md:text-4xl font-black text-gray-900">Scambi & Mercatino 🃏</h1>
+          <p class="text-gray-600 text-sm md:text-base mt-1 max-w-xl">
+            Cerca le carte dei ragazzi del gruppo e contatta il proprietario su WhatsApp per scambiare dal vivo il sabato a La Muffetteria.
+          </p>
+        </div>
+
+        <!-- AREA LOGIN / PUBBLICAZIONE -->
+        <div class="flex items-center gap-3 self-start md:self-center">
+          <div id="auth-logged-out">
+            <button id="btn-login" class="btn btn-primary btn-md gap-2 font-bold">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M21.35 11.1h-9.17v2.73h6.51c-.33 3.81-3.5 5.44-6.5 5.44C8.36 19.27 5 16.25 5 12c0-4.1 3.2-7.27 7.2-7.27 3.09 0 4.9 1.97 4.9 1.97L19 4.72S16.56 2 12.1 2C6.42 2 2.03 6.8 2.03 12c0 5.05 4.13 10 10.22 10 5.35 0 9.25-3.67 9.25-9.09 0-1.15-.15-1.81-.15-1.81Z"/></svg>
+              Accedi per pubblicare
+            </button>
+          </div>
+
+          <div id="auth-logged-in" class="hidden flex items-center gap-3">
+            <button onclick="modal_aggiungi.showModal()" class="btn btn-primary btn-md font-bold">
+              + Aggiungi Carta
+            </button>
+            <div class="dropdown dropdown-end">
+              <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
+                <div class="w-10 rounded-full ring ring-[#d32436] ring-offset-white ring-offset-2">
+                  <img id="user-avatar" alt="Avatar" src="https://ui-avatars.com/api/?name=MZ" />
+                </div>
+              </div>
+              <ul tabindex="0" class="menu menu-sm dropdown-content bg-white border border-gray-100 rounded-box z-[20] mt-3 w-52 p-2 shadow-lg">
+                <li class="menu-title"><span id="user-name-label" class="text-gray-800 font-bold">Utente</span></li>
+                <li><button id="btn-logout" class="text-[#d32436] font-medium">Esci</button></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BARRA FILTRI -->
+    <section class="max-w-6xl mx-auto px-4 md:px-8 pt-6">
+      <div class="bg-gray-50 p-4 rounded-2xl border border-gray-100 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 items-center">
+        <!-- Ricerca testo -->
+        <input type="text" id="filter-search" placeholder="Cerca nome carta o venditore..." class="input input-bordered bg-white w-full" />
+        
+        <!-- Filtro Gioco -->
+        <select id="filter-game" class="select select-bordered bg-white w-full">
+          <option value="TUTTI">Tutti i giochi</option>
+          <option value="Pokémon">Pokémon</option>
+          <option value="Magic: The Gathering">Magic: The Gathering</option>
+          <option value="Yu-Gi-Oh!">Yu-Gi-Oh!</option>
+          <option value="One Piece">One Piece</option>
+          <option value="Altro">Altro</option>
+        </select>
+
+        <!-- Filtro Tipo -->
+        <select id="filter-type" class="select select-bordered bg-white w-full">
+          <option value="TUTTI">Vendita & Scambio</option>
+          <option value="Vendita">Solo Vendita</option>
+          <option value="Scambio">Solo Scambio</option>
+          <option value="Vendita / Scambio">Vendita o Scambio</option>
+        </select>
+
+        <!-- Toggle Solo Mie Carte (visibile solo se loggato) -->
+        <div id="filter-mine-wrapper" class="hidden flex items-center justify-between sm:justify-start gap-2 px-2">
+          <input type="checkbox" id="filter-mine" class="toggle toggle-primary" />
+          <label for="filter-mine" class="label-text cursor-pointer font-bold text-gray-700">Solo le mie carte</label>
+        </div>
+      </div>
+    </section>
+
+    <!-- GRIGLIA CARTE -->
+    <section class="max-w-6xl mx-auto px-4 md:px-8 py-8">
+      <div id="loading-spinner" class="flex justify-center py-12">
+        <span class="loading loading-spinner loading-lg text-[#d32436]"></span>
+      </div>
+
+      <div id="empty-state" class="hidden text-center py-16 bg-gray-50 rounded-3xl border border-gray-100 space-y-2">
+        <p class="text-xl font-black text-gray-800">Nessuna carta trovata 😕</p>
+        <p class="text-sm text-gray-500">Prova a cambiare filtri oppure accedi con Google per pubblicare la prima carta!</p>
+      </div>
+
+      <div id="cards-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <!-- Le card vengono generate dinamicamente qui -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MODAL AGGIUNGI CARTA -->
+  <dialog id="modal_aggiungi" class="modal">
+    <div class="modal-box max-w-md bg-white">
+      <form method="dialog">
+        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+      </form>
+      <h3 class="font-black text-xl text-gray-900 mb-4">Pubblica una carta</h3>
+      
+      <form id="form-nuova-carta" class="space-y-3">
+        <div class="form-control">
+          <label class="label"><span class="label-text font-bold">Nome Carta (ed espansione/condizioni) *</span></label>
+          <input type="text" id="input-titolo" required placeholder="Es. Charizard ex - Near Mint" class="input input-bordered w-full" />
+        </div>
+
+        <div class="grid grid-cols-2 gap-2">
+          <div class="form-control">
+            <label class="label"><span class="label-text font-bold">Gioco *</span></label>
+            <select id="input-gioco" class="select select-bordered w-full">
+              <option value="Pokémon">Pokémon</option>
+              <option value="Magic: The Gathering">Magic: The Gathering</option>
+              <option value="Yu-Gi-Oh!">Yu-Gi-Oh!</option>
+              <option value="One Piece">One Piece</option>
+              <option value="Altro">Altro</option>
+            </select>
+          </div>
+
+          <div class="form-control">
+            <label class="label"><span class="label-text font-bold">Modalità *</span></label>
+            <select id="input-tipo" class="select select-bordered w-full">
+              <option value="Vendita / Scambio">Vendita / Scambio</option>
+              <option value="Vendita">Solo Vendita</option>
+              <option value="Scambio">Solo Scambio</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-2">
+          <div class="form-control">
+            <label class="label"><span class="label-text font-bold">Prezzo (€) o Valore</span></label>
+            <input type="text" id="input-prezzo" placeholder="Es. 15€ o Trattabile" class="input input-bordered w-full" />
+          </div>
+
+          <div class="form-control">
+            <label class="label"><span class="label-text font-bold">Tuo Nome / Nick *</span></label>
+            <input type="text" id="input-venditore" required placeholder="Es. Tiziano" class="input input-bordered w-full" />
+          </div>
+        </div>
+
+        <div class="form-control">
+          <label class="label"><span class="label-text font-bold">Numero WhatsApp (con 39) *</span></label>
+          <input type="tel" id="input-whatsapp" required placeholder="Es. 393331234567" pattern="[0-9]{10,15}" class="input input-bordered w-full" />
+          <label class="label"><span class="label-text-alt text-gray-500">Salvato sul tuo dispositivo per le prossime carte</span></label>
+        </div>
+
+        <div class="form-control">
+          <label class="label"><span class="label-text font-bold">Foto della carta (opzionale)</span></label>
+          <input type="file" id="input-foto" accept="image/*" class="file-input file-input-bordered w-full" />
+        </div>
+
+        <div class="modal-action">
+          <button type="submit" id="btn-submit-carta" class="btn btn-primary w-full font-bold">Pubblica Carta</button>
+        </div>
+      </form>
+    </div>
+  </dialog>
+
+  <!-- FOOTER DINAMICO -->
+  <custom-footer></custom-footer>
+
+  <!-- SCRIPT SITO (Navbar & Footer) -->
+  <script src="script.js"></script>
+
+  <!-- FIREBASE & LOGICA SCAMBI -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+    import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+    import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyB8XvgFLR-RbpAtQ2oaqVxyMBpauL-vAiM",
+      authDomain: "malazone.firebaseapp.com",
+      projectId: "malazone",
+      storageBucket: "malazone.firebasestorage.app",
+      messagingSenderId: "127234290090",
+      appId: "1:127234290090:web:1b91c79f7c666641017bd3",
+      measurementId: "G-NVKZ9TPBWE"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+    const provider = new GoogleAuthProvider();
+
+    let currentUser = null;
+    let allCards = [];
+
+    const authLoggedOut = document.getElementById("auth-logged-out");
+    const authLoggedIn = document.getElementById("auth-logged-in");
+    const filterMineWrapper = document.getElementById("filter-mine-wrapper");
+    const cardsGrid = document.getElementById("cards-grid");
+    const loadingSpinner = document.getElementById("loading-spinner");
+    const emptyState = document.getElementById("empty-state");
+
+    if (localStorage.getItem("mz_whatsapp")) {
+      document.getElementById("input-whatsapp").value = localStorage.getItem("mz_whatsapp");
+    }
+    if (localStorage.getItem("mz_nick")) {
+      document.getElementById("input-venditore").value = localStorage.getItem("mz_nick");
+    }
+
+    document.getElementById("btn-login").addEventListener("click", async () => {
+      try {
+        await signInWithPopup(auth, provider);
+      } catch (err) {
+        alert("Errore durante l'accesso: " + err.message);
+      }
+    });
+
+    document.getElementById("btn-logout").addEventListener("click", () => signOut(auth));
+
+    onAuthStateChanged(auth, (user) => {
+      currentUser = user;
+      if (user) {
+        authLoggedOut.classList.add("hidden");
+        authLoggedIn.classList.remove("hidden");
+        filterMineWrapper.classList.remove("hidden");
+        document.getElementById("user-avatar").src = user.photoURL || `https://ui-avatars.com/api/?name=${encodeURIComponent(user.displayName || "MZ")}`;
+        document.getElementById("user-name-label").textContent = user.displayName || user.email;
+        if (!document.getElementById("input-venditore").value && user.displayName) {
+          document.getElementById("input-venditore").value = user.displayName.split(" ")[0];
+        }
+      } else {
+        authLoggedOut.classList.remove("hidden");
+        authLoggedIn.classList.add("hidden");
+        filterMineWrapper.classList.add("hidden");
+        document.getElementById("filter-mine").checked = false;
+      }
+      renderCards();
+    });
+
+    function compressImage(file) {
+      return new Promise((resolve) => {
+        if (!file) return resolve("");
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const img = new Image();
+          img.onload = () => {
+            const canvas = document.createElement("canvas");
+            const MAX_WIDTH = 550;
+            const scale = Math.min(1, MAX_WIDTH / img.width);
+            canvas.width = img.width * scale;
+            canvas.height = img.height * scale;
+            const ctx = canvas.getContext("2d");
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+            resolve(canvas.toDataURL("image/jpeg", 0.72));
+          };
+          img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    async function loadCards() {
+      loadingSpinner.classList.remove("hidden");
+      try {
+        const q = query(collection(db, "carte"), orderBy("createdAt", "desc"));
+        const snapshot = await getDocs(q);
+        allCards = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+      } catch (err) {
+        console.error("Errore caricamento carte:", err);
+      } finally {
+        loadingSpinner.classList.add("hidden");
+        renderCards();
+      }
+    }
+
+    function renderCards() {
+      const searchText = document.getElementById("filter-search").value.toLowerCase().trim();
+      const selectedGame = document.getElementById("filter-game").value;
+      const selectedType = document.getElementById("filter-type").value;
+      const onlyMine = document.getElementById("filter-mine").checked;
+
+      const filtered = allCards.filter(card => {
+        const matchText = !searchText || 
+          card.titolo.toLowerCase().includes(searchText) || 
+          card.venditore.toLowerCase().includes(searchText);
+        const matchGame = selectedGame === "TUTTI" || card.gioco === selectedGame;
+        const matchType = selectedType === "TUTTI" || card.tipo === selectedType;
+        const matchMine = !onlyMine || (currentUser && card.userId === currentUser.uid);
+        return matchText && matchGame && matchType && matchMine;
+      });
+
+      cardsGrid.innerHTML = "";
+      if (filtered.length === 0) {
+        emptyState.classList.remove("hidden");
+        return;
+      }
+      emptyState.classList.add("hidden");
+
+      filtered.forEach(card => {
+        const isOwner = currentUser && card.userId === currentUser.uid;
+        const cleanPhone = (card.whatsapp || "").replace(/\D/g, "");
+        const waText = encodeURIComponent(`Ciao ${card.venditore}! Ho visto su Mala Zone che hai disponibile: "${card.titolo}" (${card.gioco}). È ancora disponibile?`);
+        const waLink = `https://wa.me/${cleanPhone}?text=${waText}`;
+        const imgSrc = card.foto || "https://placehold.co/400x500/f3f4f6/6b7280?text=Nessuna+Foto";
+
+        const badgeColor = card.gioco === "Pokémon" ? "bg-[#f9bb0b] text-gray-900 border-none" :
+                           card.gioco === "Magic: The Gathering" ? "badge-info text-white" :
+                           card.gioco === "Yu-Gi-Oh!" ? "bg-[#d32436] text-white border-none" : "badge-neutral";
+
+        const cardEl = document.createElement("div");
+        cardEl.className = "card bg-white shadow-sm hover:shadow-md transition-shadow border border-gray-100 rounded-2xl overflow-hidden flex flex-col";
+        cardEl.innerHTML = `
+          <figure class="h-56 bg-gray-100 relative">
+            <img src="${imgSrc}" alt="${card.titolo}" class="w-full h-full object-cover" loading="lazy" />
+            <span class="badge ${badgeColor} font-bold absolute top-3 left-3 shadow-sm">${card.gioco}</span>
+            <span class="badge bg-white/90 text-gray-800 border-none font-semibold absolute bottom-3 right-3 shadow-sm">${card.tipo}</span>
+          </figure>
+          <div class="card-body p-5 flex-1 flex flex-col justify-between">
+            <div>
+              <h2 class="font-bold text-gray-900 text-base leading-snug">${card.titolo}</h2>
+              <p class="text-lg font-black text-[#d32436] mt-1">${card.prezzo || "Solo Scambio"}</p>
+              <p class="text-xs text-gray-500 mt-1">Proposta da: <strong class="text-gray-800">${card.venditore}</strong></p>
+            </div>
+            <div class="card-actions mt-4 flex flex-col gap-2">
+              <a href="${waLink}" target="_blank" rel="noopener" class="btn btn-success btn-sm w-full text-white font-bold">
+                Contatta ${card.venditore}
+              </a>
+              ${isOwner ? `<button data-id="${card.id}" class="btn-delete btn btn-outline btn-error btn-xs w-full">Segna come venduta / Rimuovi</button>` : ""}
+            </div>
+          </div>
+        `;
+        cardsGrid.appendChild(cardEl);
+      });
+
+      document.querySelectorAll(".btn-delete").forEach(btn => {
+        btn.addEventListener("click", async (e) => {
+          const id = e.target.getAttribute("data-id");
+          if (confirm("Vuoi rimuovere questa carta dalla bacheca?")) {
+            await deleteDoc(doc(db, "carte", id));
+            await loadCards();
+          }
+        });
+      });
+    }
+
+    document.getElementById("form-nuova-carta").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      if (!currentUser) return alert("Devi effettuare l'accesso!");
+
+      const btnSubmit = document.getElementById("btn-submit-carta");
+      btnSubmit.disabled = true;
+      btnSubmit.textContent = "Caricamento...";
+
+      try {
+        const titolo = document.getElementById("input-titolo").value.trim();
+        const gioco = document.getElementById("input-gioco").value;
+        const tipo = document.getElementById("input-tipo").value;
+        const prezzo = document.getElementById("input-prezzo").value.trim();
+        const venditore = document.getElementById("input-venditore").value.trim();
+        const whatsapp = document.getElementById("input-whatsapp").value.trim();
+        const fotoFile = document.getElementById("input-foto").files[0];
+
+        localStorage.setItem("mz_whatsapp", whatsapp);
+        localStorage.setItem("mz_nick", venditore);
+
+        const fotoBase64 = await compressImage(fotoFile);
+
+        await addDoc(collection(db, "carte"), {
+          userId: currentUser.uid,
+          titolo,
+          gioco,
+          tipo,
+          prezzo,
+          venditore,
+          whatsapp,
+          foto: fotoBase64,
+          createdAt: serverTimestamp()
+        });
+
+        document.getElementById("input-titolo").value = "";
+        document.getElementById("input-prezzo").value = "";
+        document.getElementById("input-foto").value = "";
+        document.getElementById("modal_aggiungi").close();
+        await loadCards();
+      } catch (err) {
+        alert("Errore salvataggio (controlla le regole Firestore): " + err.message);
+      } finally {
+        btnSubmit.disabled = false;
+        btnSubmit.textContent = "Pubblica Carta";
+      }
+    });
+
+    ["filter-search", "filter-game", "filter-type", "filter-mine"].forEach(id => {
+      document.getElementById(id).addEventListener("input", renderCards);
+      document.getElementById(id).addEventListener("change", renderCards);
+    });
+
+    loadCards();
+  </script>
+</body>
+</html>
