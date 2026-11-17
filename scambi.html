@@ -62,7 +62,7 @@
       </div>
     </section>
 
-    <!-- CONTENUTO PUBBLICO (il login serve solo per pubblicare) -->
+    <!-- CONTENUTO PUBBLICO -->
     <div id="content-main">
 
       <!-- BARRA FILTRI -->
@@ -163,7 +163,7 @@
         <div class="form-control">
           <label class="label"><span class="label-text font-bold">Numero WhatsApp (con 39) *</span></label>
           <input type="tel" id="input-whatsapp" required placeholder="Es. 393331234567" pattern="[0-9]{10,15}" class="input input-bordered w-full" />
-          <label class="label"><span class="label-text-alt text-gray-500">Serve per farti contattare in privato su WhatsApp. Sarà visibile a tutti i visitatori del sito. Salvato sul tuo dispositivo per le prossime carte</span></label>
+          <label class="label"><span class="label-text-alt text-gray-500">Serve per farti contattare in privato su WhatsApp. Salvato sul tuo dispositivo per le prossime carte.</span></label>
         </div>
 
         <div class="form-control">
@@ -175,6 +175,34 @@
           <button type="submit" id="btn-submit-carta" class="btn btn-primary w-full font-bold">Pubblica Carta</button>
         </div>
       </form>
+    </div>
+  </dialog>
+
+  <!-- MODAL CONFERMA SEGNALAZIONE COMMUNITY -->
+  <dialog id="modal_condividi" class="modal">
+    <div class="modal-box max-w-md bg-white space-y-4">
+      <div class="flex items-center gap-3">
+        <span class="text-3xl">📢</span>
+        <div>
+          <h3 class="font-black text-xl text-gray-900">Carta pubblicata!</h3>
+          <p class="text-sm text-gray-600">Vuoi segnalarla subito nella Community WhatsApp?</p>
+        </div>
+      </div>
+
+      <div class="bg-gray-50 border border-gray-200 rounded-xl p-3 text-xs text-gray-700 whitespace-pre-line" id="share-preview-text"></div>
+
+      <p class="text-xs text-gray-500">
+        Cliccando su <strong>Sì</strong>, il messaggio viene copiato in automatico negli appunti e si apre il gruppo: dovrai solo fare <strong>Incolla → Invia</strong>.
+      </p>
+
+      <div class="modal-action flex gap-2">
+        <form method="dialog" class="flex-1">
+          <button class="btn btn-ghost w-full font-bold">No, grazie</button>
+        </form>
+        <button id="btn-confirm-share" type="button" class="btn btn-success flex-1 text-white font-bold">
+          Sì, segnala nel gruppo
+        </button>
+      </div>
     </div>
   </dialog>
 
@@ -200,7 +228,6 @@
       measurementId: "G-NVKZ9TPBWE"
     };
 
-    // Link di invito al gruppo WhatsApp della community (scambi)
     const GROUP_LINK = "https://chat.whatsapp.com/IEUSyUuE9yOKluKMJ28z1z";
 
     const app = initializeApp(firebaseConfig);
@@ -210,6 +237,7 @@
 
     let currentUser = null;
     let allCards = [];
+    let pendingShareMessage = "";
 
     const authLoggedOut = document.getElementById("auth-logged-out");
     const authLoggedIn = document.getElementById("auth-logged-in");
@@ -218,7 +246,6 @@
     const loadingSpinner = document.getElementById("loading-spinner");
     const emptyState = document.getElementById("empty-state");
 
-    // Precompila i campi del form con i dati salvati sul dispositivo
     if (localStorage.getItem("mz_whatsapp")) {
       document.getElementById("input-whatsapp").value = localStorage.getItem("mz_whatsapp");
     }
@@ -226,11 +253,22 @@
       document.getElementById("input-venditore").value = localStorage.getItem("mz_nick");
     }
 
-    // Escape per evitare HTML injection dai dati scritti dagli utenti
     function esc(str) {
       return String(str ?? "").replace(/[&<>"']/g, c => ({
         "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
       }[c]));
+    }
+
+    function formatPrice(raw) {
+      const val = String(raw || "").trim();
+      if (!val) return "Solo Scambio";
+      return /^\d+([.,]\d+)?$/.test(val) ? `${val}€` : val;
+    }
+
+    function buildShareMessage({ tipo, titolo, gioco, prezzo }) {
+      const rawPrice = String(prezzo || "").trim();
+      const displayPrice = formatPrice(rawPrice);
+      return `🆕 Nuova carta in bacheca!\nHo in ${(tipo || "vendita").toLowerCase()}: "${titolo}" (${gioco})${rawPrice ? " - " + displayPrice : ""}.\nGuarda la bacheca: ${location.origin}${location.pathname}`;
     }
 
     function showToast(text) {
@@ -240,6 +278,21 @@
       document.body.appendChild(t);
       setTimeout(() => t.remove(), 3500);
     }
+
+    function shareToGroup(message) {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(message).catch(() => {});
+      }
+      showToast("Messaggio copiato! Incollalo nel gruppo 📋");
+      window.open(GROUP_LINK, "_blank", "noopener");
+    }
+
+    document.getElementById("btn-confirm-share").addEventListener("click", () => {
+      document.getElementById("modal_condividi").close();
+      if (pendingShareMessage) {
+        shareToGroup(pendingShareMessage);
+      }
+    });
 
     async function login() {
       try {
@@ -340,18 +393,11 @@
       filtered.forEach(card => {
         const isOwner = !!currentUser && card.userId === currentUser.uid;
         const cleanPhone = (card.whatsapp || "").replace(/\D/g, "");
+        const displayPrice = formatPrice(card.prezzo);
 
-        const rawPrice = String(card.prezzo || "").trim();
-        const displayPrice = !rawPrice
-          ? "Solo Scambio"
-          : (/^\d+([.,]\d+)?$/.test(rawPrice) ? `${rawPrice}€` : rawPrice);
-
-        // Messaggio per contatto privato
         const msg = `Ciao ${card.venditore}! Ho visto su Mala Zone che hai disponibile: "${card.titolo}" (${card.gioco}). È ancora disponibile?`;
         const privateLink = cleanPhone ? `https://wa.me/${cleanPhone}?text=${encodeURIComponent(msg)}` : "";
-
-        // Annuncio da condividere nel gruppo (solo per il proprietario della carta)
-        const shareMsg = `Ho in ${(card.tipo || "vendita").toLowerCase()}: "${card.titolo}" (${card.gioco})${rawPrice ? " - " + displayPrice : ""}. Guarda la bacheca: ${location.origin}${location.pathname}`;
+        const shareMsg = buildShareMessage(card);
 
         const imgSrc = card.foto || "https://placehold.co/400x500/f3f4f6/6b7280?text=Nessuna+Foto";
 
@@ -390,20 +436,12 @@
         cardsGrid.appendChild(cardEl);
       });
 
-      // Condividi nel gruppo: copia l'annuncio e apre il gruppo WhatsApp
       document.querySelectorAll(".btn-share").forEach(btn => {
         btn.addEventListener("click", () => {
-          const msg = decodeURIComponent(btn.dataset.msg);
-          // Niente await prima di window.open, altrimenti il browser può bloccare il popup
-          if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard.writeText(msg).catch(() => {});
-          }
-          showToast("Annuncio copiato! Incollalo nel gruppo 📋");
-          window.open(GROUP_LINK, "_blank", "noopener");
+          shareToGroup(decodeURIComponent(btn.dataset.msg));
         });
       });
 
-      // Rimozione carta (solo proprietario)
       document.querySelectorAll(".btn-delete").forEach(btn => {
         btn.addEventListener("click", async (e) => {
           const id = e.currentTarget.getAttribute("data-id");
@@ -458,6 +496,11 @@
         document.getElementById("input-foto").value = "";
         document.getElementById("modal_aggiungi").close();
         await loadCards();
+
+        // Prepara il messaggio e apre il popup di conferma segnalazione alla community
+        pendingShareMessage = buildShareMessage({ tipo, titolo, gioco, prezzo });
+        document.getElementById("share-preview-text").textContent = pendingShareMessage;
+        document.getElementById("modal_condividi").showModal();
       } catch (err) {
         alert("Errore salvataggio: " + err.message);
       } finally {
