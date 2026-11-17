@@ -13,7 +13,7 @@ class CustomNavbar extends HTMLElement {
           <ul class="menu menu-horizontal px-1 font-medium gap-2">
             <li><a href="chi-siamo.html">Chi siamo</a></li>
             <li><a href="eventi.html">Eventi</a></li>
-            <li><a href="scambi.html">Scambia</a></li>
+            <li><a href="mercatino.html">Mercatino</a></li>
             <li><a href="contatti.html">Contatti</a></li>
           </ul>
         </div>
@@ -30,7 +30,7 @@ class CustomNavbar extends HTMLElement {
             <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-3 shadow-lg bg-white rounded-box w-56 gap-2">
               <li><a href="chi-siamo.html">Chi siamo</a></li>
               <li><a href="eventi.html">Eventi</a></li>
-              <li><a href="scambi.html">Scambia</a></li>
+              <li><a href="mercatino.html">Mercatino</a></li>
               <li><a href="contatti.html">Contatti</a></li>
               <div class="divider my-1"></div>
               <li><a href="socio.html" class="btn btn-primary btn-sm text-white">Diventa socio</a></li>
