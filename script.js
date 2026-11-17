@@ -1,3 +1,13 @@
+  // Inserisce automaticamente la favicon su tutte le pagine
+(function() {
+  const link = document.createElement('link');
+  link.icon = true;
+  link.rel = 'icon';
+  link.type = 'image/png';
+  link.href = 'media/favicon.png';
+  document.head.appendChild(link);
+})();
+
 // DEFINIAMO IL COMPONENTE DINAMICO NAVBAR
 class CustomNavbar extends HTMLElement {
   connectedCallback() {
@@ -92,15 +102,7 @@ function initCarousel() {
     }
   }
 
-  // Inserisce automaticamente la favicon su tutte le pagine
-(function() {
-  const link = document.createElement('link');
-  link.icon = true;
-  link.rel = 'icon';
-  link.type = 'image/png';
-  link.href = 'media/favicon.png';
-  document.head.appendChild(link);
-})();
+
 
   let slideInterval = setInterval(moveToNextSlide, intervalTime);
 
