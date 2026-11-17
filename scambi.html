@@ -68,7 +68,7 @@
       <!-- BARRA FILTRI -->
       <section class="max-w-6xl mx-auto px-4 md:px-8 pt-6">
         <div class="bg-gray-50 p-4 rounded-2xl border border-gray-100 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 items-center">
-          <input type="text" id="filter-search" placeholder="Cerca nome carta o venditore..." class="input input-bordered bg-white w-full" />
+          <input type="text" id="filter-search" placeholder="Cerca carta, condizione o venditore..." class="input input-bordered bg-white w-full" />
 
           <select id="filter-game" class="select select-bordered bg-white w-full">
             <option value="TUTTI">Tutti i giochi</option>
@@ -122,8 +122,8 @@
 
       <form id="form-nuova-carta" class="space-y-3">
         <div class="form-control">
-          <label class="label"><span class="label-text font-bold">Nome Carta (ed espansione/condizioni) *</span></label>
-          <input type="text" id="input-titolo" required placeholder="Es. Charizard ex - Near Mint" class="input input-bordered w-full" />
+          <label class="label"><span class="label-text font-bold">Nome Carta *</span></label>
+          <input type="text" id="input-titolo" required placeholder="Es. Charizard ex 199/165" class="input input-bordered w-full" />
         </div>
 
         <div class="grid grid-cols-2 gap-2">
@@ -139,6 +139,23 @@
           </div>
 
           <div class="form-control">
+            <label class="label"><span class="label-text font-bold">Condizioni</span></label>
+            <select id="input-condizione" class="select select-bordered w-full">
+              <option value="">Non specificate</option>
+              <option value="Slab (Gradata)">Slab (Gradata)</option>
+              <option value="MT (Mint)">MT (Mint)</option>
+              <option value="NM (Near Mint)">NM (Near Mint)</option>
+              <option value="EX (Excellent)">EX (Excellent)</option>
+              <option value="GD (Good)">GD (Good)</option>
+              <option value="LP (Light Played)">LP (Light Played)</option>
+              <option value="PL (Played)">PL (Played)</option>
+              <option value="PO (Poor)">PO (Poor)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-2">
+          <div class="form-control">
             <label class="label"><span class="label-text font-bold">Modalità *</span></label>
             <select id="input-tipo" class="select select-bordered w-full">
               <option value="Vendita / Scambio">Vendita / Scambio</option>
@@ -146,24 +163,28 @@
               <option value="Scambio">Solo Scambio</option>
             </select>
           </div>
-        </div>
 
-        <div class="grid grid-cols-2 gap-2">
           <div class="form-control">
             <label class="label"><span class="label-text font-bold">Prezzo (€) o Valore</span></label>
-            <input type="text" id="input-prezzo" placeholder="Es. 15€ o Trattabile" class="input input-bordered w-full" />
-          </div>
-
-          <div class="form-control">
-            <label class="label"><span class="label-text font-bold">Tuo Nome / Nick *</span></label>
-            <input type="text" id="input-venditore" required placeholder="Es. Tiziano" class="input input-bordered w-full" />
+            <input type="text" id="input-prezzo" placeholder="Es. 15 o Trattabile" class="input input-bordered w-full" />
           </div>
         </div>
 
         <div class="form-control">
-          <label class="label"><span class="label-text font-bold">Numero WhatsApp (con 39) *</span></label>
-          <input type="tel" id="input-whatsapp" required placeholder="Es. 393331234567" pattern="[0-9]{10,15}" class="input input-bordered w-full" />
-          <label class="label"><span class="label-text-alt text-gray-500">Serve per farti contattare in privato su WhatsApp. Salvato sul tuo dispositivo per le prossime carte.</span></label>
+          <label class="label"><span class="label-text font-bold">Note / Dettagli extra (opzionale)</span></label>
+          <textarea id="input-note" rows="2" placeholder="Es. Lingua ITA, PSA 9, cerco carte Eevee per scambio..." class="textarea textarea-bordered w-full leading-snug"></textarea>
+        </div>
+
+        <div class="grid grid-cols-2 gap-2">
+          <div class="form-control">
+            <label class="label"><span class="label-text font-bold">Tuo Nome / Nick *</span></label>
+            <input type="text" id="input-venditore" required placeholder="Es. Tiziano" class="input input-bordered w-full" />
+          </div>
+
+          <div class="form-control">
+            <label class="label"><span class="label-text font-bold">WhatsApp (con 39) *</span></label>
+            <input type="tel" id="input-whatsapp" required placeholder="Es. 393331234567" pattern="[0-9]{10,15}" class="input input-bordered w-full" />
+          </div>
         </div>
 
         <div class="form-control">
@@ -178,6 +199,17 @@
     </div>
   </dialog>
 
+  <!-- MODAL DETTAGLIO SINGOLA CARTA -->
+  <dialog id="modal_dettaglio" class="modal">
+    <div class="modal-box max-w-lg bg-white p-0 overflow-hidden">
+      <button id="btn-close-dettaglio" class="btn btn-sm btn-circle bg-white/90 hover:bg-white border-none shadow-md absolute right-3 top-3 z-10">✕</button>
+      <div id="dettaglio-body"></div>
+    </div>
+    <form method="dialog" class="modal-backdrop">
+      <button id="backdrop-close-dettaglio">close</button>
+    </form>
+  </dialog>
+
   <!-- MODAL CONFERMA SEGNALAZIONE COMMUNITY -->
   <dialog id="modal_condividi" class="modal">
     <div class="modal-box max-w-md bg-white space-y-4">
@@ -189,10 +221,10 @@
         </div>
       </div>
 
-      <div class="bg-gray-50 border border-gray-200 rounded-xl p-3 text-xs text-gray-700 whitespace-pre-line" id="share-preview-text"></div>
+      <div class="bg-gray-50 border border-gray-200 rounded-xl p-3 text-xs text-gray-700 whitespace-pre-line break-words" id="share-preview-text"></div>
 
       <p class="text-xs text-gray-500">
-        Cliccando su <strong>Sì</strong>, il messaggio viene copiato in automatico negli appunti e si apre il gruppo: dovrai solo fare <strong>Incolla → Invia</strong>.
+        Cliccando su <strong>Sì</strong>, il messaggio con il link diretto a questa carta viene copiato negli appunti e si apre il gruppo: dovrai solo fare <strong>Incolla → Invia</strong>.
       </p>
 
       <div class="modal-action flex gap-2">
@@ -209,7 +241,7 @@
   <!-- FOOTER DINAMICO -->
   <custom-footer></custom-footer>
 
-  <!-- SCRIPT SITO (Navbar & Footer) -->
+  <!-- SCRIPT SITO -->
   <script src="script.js"></script>
 
   <!-- FIREBASE & LOGICA SCAMBI -->
@@ -265,10 +297,21 @@
       return /^\d+([.,]\d+)?$/.test(val) ? `${val}€` : val;
     }
 
-    function buildShareMessage({ tipo, titolo, gioco, prezzo }) {
+    function getCardUrl(cardId) {
+      const url = new URL(window.location.href);
+      url.search = "";
+      url.hash = "";
+      if (cardId) url.searchParams.set("carta", cardId);
+      return url.toString();
+    }
+
+    function buildShareMessage({ id, tipo, titolo, gioco, condizione, prezzo, venditore }) {
       const rawPrice = String(prezzo || "").trim();
       const displayPrice = formatPrice(rawPrice);
-      return `🆕 Nuova carta in bacheca!\nHo in ${(tipo || "vendita").toLowerCase()}: "${titolo}" (${gioco})${rawPrice ? " - " + displayPrice : ""}.\nGuarda la bacheca: ${location.origin}${location.pathname}`;
+      const condPart = condizione ? ` [${condizione}]` : "";
+      const pricePart = rawPrice ? ` — ${displayPrice}` : "";
+      const cardUrl = getCardUrl(id);
+      return `🆕 Nuova carta da ${venditore}!\nHo in ${(tipo || "vendita").toLowerCase()}: "${titolo}" (${gioco})${condPart}${pricePart}\n👉 Vedi annuncio e foto: ${cardUrl}`;
     }
 
     function showToast(text) {
@@ -285,6 +328,89 @@
       }
       showToast("Messaggio copiato! Incollalo nel gruppo 📋");
       window.open(GROUP_LINK, "_blank", "noopener");
+    }
+
+    function closeCardDetail() {
+      document.getElementById("modal_dettaglio").close();
+      const url = new URL(window.location.href);
+      if (url.searchParams.has("carta")) {
+        url.searchParams.delete("carta");
+        window.history.replaceState({}, "", url.toString());
+      }
+    }
+
+    document.getElementById("btn-close-dettaglio").addEventListener("click", closeCardDetail);
+    document.getElementById("backdrop-close-dettaglio").addEventListener("click", closeCardDetail);
+
+    function openCardDetail(card, updateUrl = true) {
+      if (!card) return;
+      if (updateUrl) {
+        window.history.replaceState({}, "", getCardUrl(card.id));
+      }
+
+      const isOwner = !!currentUser && card.userId === currentUser.uid;
+      const cleanPhone = (card.whatsapp || "").replace(/\D/g, "");
+      const displayPrice = formatPrice(card.prezzo);
+      const imgSrc = card.foto || "https://placehold.co/600x700/f3f4f6/6b7280?text=Nessuna+Foto";
+      const msg = `Ciao ${card.venditore}! Ho visto su Mala Zone la tua carta: "${card.titolo}" (${card.gioco}${card.condizione ? " - " + card.condizione : ""}). È ancora disponibile?`;
+      const privateLink = cleanPhone ? `https://wa.me/${cleanPhone}?text=${encodeURIComponent(msg)}` : "";
+      const shareMsg = buildShareMessage(card);
+
+      document.getElementById("dettaglio-body").innerHTML = `
+        <div class="bg-gray-100 max-h-96 flex items-center justify-center overflow-hidden">
+          <img src="${esc(imgSrc)}" alt="${esc(card.titolo)}" class="w-full max-h-96 object-contain" />
+        </div>
+        <div class="p-6 space-y-4">
+          <div class="flex flex-wrap gap-2">
+            <span class="badge bg-[#d32436] text-white border-none font-bold">${esc(card.gioco)}</span>
+            <span class="badge badge-outline font-semibold">${esc(card.tipo)}</span>
+            ${card.condizione ? `<span class="badge bg-amber-100 text-amber-900 border-none font-bold">${esc(card.condizione)}</span>` : ""}
+          </div>
+
+          <div>
+            <h2 class="text-2xl font-black text-gray-900 leading-tight">${esc(card.titolo)}</h2>
+            <p class="text-2xl font-black text-[#d32436] mt-1">${esc(displayPrice)}</p>
+          </div>
+
+          ${card.note ? `
+            <div class="bg-gray-50 border border-gray-100 rounded-xl p-3 text-sm text-gray-700 whitespace-pre-line">
+              <span class="block text-xs font-bold uppercase text-gray-400 mb-1">Note del venditore</span>
+              ${esc(card.note)}
+            </div>
+          ` : ""}
+
+          <p class="text-sm text-gray-600">Proposta da: <strong class="text-gray-900">${esc(card.venditore)}</strong></p>
+
+          <div class="pt-2 flex flex-col gap-2">
+            ${isOwner ? `
+              <button id="detail-share-btn" class="btn btn-success w-full text-white font-bold">
+                Condividi link carta nel gruppo
+              </button>
+            ` : (privateLink ? `
+              <a href="${privateLink}" target="_blank" rel="noopener" class="btn btn-success w-full text-white font-bold">
+                Contatta ${esc(card.venditore)} su WhatsApp
+              </a>
+            ` : `<p class="text-xs text-center text-gray-500">Contatto non disponibile</p>`)}
+            <button id="detail-copy-link-btn" class="btn btn-ghost btn-sm w-full text-gray-600">
+              Copia link diretto annuncio 🔗
+            </button>
+          </div>
+        </div>
+      `;
+
+      const detailShareBtn = document.getElementById("detail-share-btn");
+      if (detailShareBtn) {
+        detailShareBtn.addEventListener("click", () => shareToGroup(shareMsg));
+      }
+
+      document.getElementById("detail-copy-link-btn").addEventListener("click", () => {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(getCardUrl(card.id)).catch(() => {});
+        }
+        showToast("Link dell'annuncio copiato! 🔗");
+      });
+
+      document.getElementById("modal_dettaglio").showModal();
     }
 
     document.getElementById("btn-confirm-share").addEventListener("click", () => {
@@ -337,13 +463,13 @@
           const img = new Image();
           img.onload = () => {
             const canvas = document.createElement("canvas");
-            const MAX_WIDTH = 550;
+            const MAX_WIDTH = 650;
             const scale = Math.min(1, MAX_WIDTH / img.width);
             canvas.width = img.width * scale;
             canvas.height = img.height * scale;
             const ctx = canvas.getContext("2d");
             ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-            resolve(canvas.toDataURL("image/jpeg", 0.72));
+            resolve(canvas.toDataURL("image/jpeg", 0.75));
           };
           img.onerror = () => resolve("");
           img.src = e.target.result;
@@ -353,7 +479,7 @@
       });
     }
 
-    async function loadCards() {
+    async function loadCards(openTargetId = null) {
       loadingSpinner.classList.remove("hidden");
       try {
         const q = query(collection(db, "carte"), orderBy("createdAt", "desc"));
@@ -364,6 +490,15 @@
       } finally {
         loadingSpinner.classList.add("hidden");
         renderCards();
+
+        if (openTargetId) {
+          const targetCard = allCards.find(c => c.id === openTargetId);
+          if (targetCard) {
+            openCardDetail(targetCard, false);
+          } else {
+            showToast("Questa carta non è più disponibile in bacheca.");
+          }
+        }
       }
     }
 
@@ -376,7 +511,9 @@
       const filtered = allCards.filter(card => {
         const matchText = !searchText ||
           (card.titolo || "").toLowerCase().includes(searchText) ||
-          (card.venditore || "").toLowerCase().includes(searchText);
+          (card.venditore || "").toLowerCase().includes(searchText) ||
+          (card.condizione || "").toLowerCase().includes(searchText) ||
+          (card.note || "").toLowerCase().includes(searchText);
         const matchGame = selectedGame === "TUTTI" || card.gioco === selectedGame;
         const matchType = selectedType === "TUTTI" || card.tipo === selectedType;
         const matchMine = !onlyMine || (currentUser && card.userId === currentUser.uid);
@@ -395,7 +532,7 @@
         const cleanPhone = (card.whatsapp || "").replace(/\D/g, "");
         const displayPrice = formatPrice(card.prezzo);
 
-        const msg = `Ciao ${card.venditore}! Ho visto su Mala Zone che hai disponibile: "${card.titolo}" (${card.gioco}). È ancora disponibile?`;
+        const msg = `Ciao ${card.venditore}! Ho visto su Mala Zone che hai disponibile: "${card.titolo}" (${card.gioco}${card.condizione ? " - " + card.condizione : ""}). È ancora disponibile?`;
         const privateLink = cleanPhone ? `https://wa.me/${cleanPhone}?text=${encodeURIComponent(msg)}` : "";
         const shareMsg = buildShareMessage(card);
 
@@ -408,16 +545,18 @@
         const cardEl = document.createElement("div");
         cardEl.className = "card bg-white shadow-sm hover:shadow-md transition-shadow border border-gray-100 rounded-2xl overflow-hidden flex flex-col";
         cardEl.innerHTML = `
-          <figure class="h-56 bg-gray-100 relative">
-            <img src="${esc(imgSrc)}" alt="${esc(card.titolo)}" class="w-full h-full object-cover" loading="lazy" />
+          <figure data-open-id="${esc(card.id)}" class="h-56 bg-gray-100 relative cursor-pointer group">
+            <img src="${esc(imgSrc)}" alt="${esc(card.titolo)}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200" loading="lazy" />
             <span class="badge ${badgeColor} font-bold absolute top-3 left-3 shadow-sm">${esc(card.gioco)}</span>
+            ${card.condizione ? `<span class="badge bg-gray-900/85 text-white border-none font-bold absolute top-3 right-3 shadow-sm">${esc(card.condizione)}</span>` : ""}
             <span class="badge bg-white/90 text-gray-800 border-none font-semibold absolute bottom-3 right-3 shadow-sm">${esc(card.tipo)}</span>
           </figure>
           <div class="card-body p-5 flex-1 flex flex-col justify-between">
             <div>
-              <h2 class="font-bold text-gray-900 text-base leading-snug">${esc(card.titolo)}</h2>
+              <h2 data-open-id="${esc(card.id)}" class="font-bold text-gray-900 text-base leading-snug cursor-pointer hover:text-[#d32436] transition-colors">${esc(card.titolo)}</h2>
               <p class="text-lg font-black text-[#d32436] mt-1">${esc(displayPrice)}</p>
-              <p class="text-xs text-gray-500 mt-1">Proposta da: <strong class="text-gray-800">${esc(card.venditore)}</strong></p>
+              ${card.note ? `<p class="text-xs text-gray-600 mt-1 line-clamp-2">${esc(card.note)}</p>` : ""}
+              <p class="text-xs text-gray-500 mt-2">Proposta da: <strong class="text-gray-800">${esc(card.venditore)}</strong></p>
             </div>
             <div class="card-actions mt-4 flex flex-col gap-2">
               ${isOwner ? `
@@ -434,6 +573,13 @@
           </div>
         `;
         cardsGrid.appendChild(cardEl);
+      });
+
+      document.querySelectorAll("[data-open-id]").forEach(el => {
+        el.addEventListener("click", () => {
+          const card = allCards.find(c => c.id === el.getAttribute("data-open-id"));
+          if (card) openCardDetail(card, true);
+        });
       });
 
       document.querySelectorAll(".btn-share").forEach(btn => {
@@ -468,8 +614,10 @@
       try {
         const titolo = document.getElementById("input-titolo").value.trim();
         const gioco = document.getElementById("input-gioco").value;
+        const condizione = document.getElementById("input-condizione").value;
         const tipo = document.getElementById("input-tipo").value;
         const prezzo = document.getElementById("input-prezzo").value.trim();
+        const note = document.getElementById("input-note").value.trim();
         const venditore = document.getElementById("input-venditore").value.trim();
         const whatsapp = document.getElementById("input-whatsapp").value.trim();
         const fotoFile = document.getElementById("input-foto").files[0];
@@ -479,12 +627,14 @@
 
         const fotoBase64 = await compressImage(fotoFile);
 
-        await addDoc(collection(db, "carte"), {
+        const docRef = await addDoc(collection(db, "carte"), {
           userId: currentUser.uid,
           titolo,
           gioco,
+          condizione,
           tipo,
           prezzo,
+          note,
           venditore,
           whatsapp,
           foto: fotoBase64,
@@ -492,13 +642,22 @@
         });
 
         document.getElementById("input-titolo").value = "";
+        document.getElementById("input-condizione").value = "";
         document.getElementById("input-prezzo").value = "";
+        document.getElementById("input-note").value = "";
         document.getElementById("input-foto").value = "";
         document.getElementById("modal_aggiungi").close();
         await loadCards();
 
-        // Prepara il messaggio e apre il popup di conferma segnalazione alla community
-        pendingShareMessage = buildShareMessage({ tipo, titolo, gioco, prezzo });
+        pendingShareMessage = buildShareMessage({
+          id: docRef.id,
+          tipo,
+          titolo,
+          gioco,
+          condizione,
+          prezzo,
+          venditore
+        });
         document.getElementById("share-preview-text").textContent = pendingShareMessage;
         document.getElementById("modal_condividi").showModal();
       } catch (err) {
@@ -514,7 +673,8 @@
       document.getElementById(id).addEventListener("change", renderCards);
     });
 
-    loadCards();
+    const initialCardId = new URLSearchParams(window.location.search).get("carta");
+    loadCards(initialCardId);
   </script>
 </body>
 </html>
