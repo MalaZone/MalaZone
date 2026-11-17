@@ -341,13 +341,17 @@
         const isOwner = !!currentUser && card.userId === currentUser.uid;
         const cleanPhone = (card.whatsapp || "").replace(/\D/g, "");
 
-        // Messaggio per il gruppo (testo semplice, senza escape: viene copiato negli appunti)
+        const rawPrice = String(card.prezzo || "").trim();
+        const displayPrice = !rawPrice
+          ? "Solo Scambio"
+          : (/^\d+([.,]\d+)?$/.test(rawPrice) ? `${rawPrice}€` : rawPrice);
+
+        // Messaggio per contatto privato
         const msg = `Ciao ${card.venditore}! Ho visto su Mala Zone che hai disponibile: "${card.titolo}" (${card.gioco}). È ancora disponibile?`;
         const privateLink = cleanPhone ? `https://wa.me/${cleanPhone}?text=${encodeURIComponent(msg)}` : "";
 
-
         // Annuncio da condividere nel gruppo (solo per il proprietario della carta)
-        const shareMsg = `Ho in ${(card.tipo || "vendita").toLowerCase()}: "${card.titolo}" (${card.gioco})${card.prezzo ? " - " + card.prezzo : ""}. Guarda la bacheca: ${location.origin}${location.pathname}`;
+        const shareMsg = `Ho in ${(card.tipo || "vendita").toLowerCase()}: "${card.titolo}" (${card.gioco})${rawPrice ? " - " + displayPrice : ""}. Guarda la bacheca: ${location.origin}${location.pathname}`;
 
         const imgSrc = card.foto || "https://placehold.co/400x500/f3f4f6/6b7280?text=Nessuna+Foto";
 
@@ -366,7 +370,7 @@
           <div class="card-body p-5 flex-1 flex flex-col justify-between">
             <div>
               <h2 class="font-bold text-gray-900 text-base leading-snug">${esc(card.titolo)}</h2>
-              <p class="text-lg font-black text-[#d32436] mt-1">${esc(card.prezzo || "Solo Scambio")}</p>
+              <p class="text-lg font-black text-[#d32436] mt-1">${esc(displayPrice)}</p>
               <p class="text-xs text-gray-500 mt-1">Proposta da: <strong class="text-gray-800">${esc(card.venditore)}</strong></p>
             </div>
             <div class="card-actions mt-4 flex flex-col gap-2">
