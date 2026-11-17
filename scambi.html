@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Scambi & Mercatino — Mala Zone</title>
-  
+
   <!-- CDN Tailwind + DaisyUI -->
   <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
   <script src="https://cdn.tailwindcss.com"></script>
@@ -29,7 +29,7 @@
           </span>
           <h1 class="text-3xl md:text-4xl font-black text-gray-900">Scambi & Mercatino 🃏</h1>
           <p class="text-gray-600 text-sm md:text-base mt-1 max-w-xl">
-            Cerca le carte dei ragazzi del gruppo e contatta il proprietario su WhatsApp per scambiare dal vivo il sabato a La Muffetteria.
+            Cerca le carte dei ragazzi del gruppo e contattali su WhatsApp per scambiare dal vivo il sabato a La Muffetteria. Chi pubblica può condividere le sue carte nel gruppo della community.
           </p>
         </div>
 
@@ -62,53 +62,53 @@
       </div>
     </section>
 
-    <!-- BARRA FILTRI -->
-    <section class="max-w-6xl mx-auto px-4 md:px-8 pt-6">
-      <div class="bg-gray-50 p-4 rounded-2xl border border-gray-100 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 items-center">
-        <!-- Ricerca testo -->
-        <input type="text" id="filter-search" placeholder="Cerca nome carta o venditore..." class="input input-bordered bg-white w-full" />
-        
-        <!-- Filtro Gioco -->
-        <select id="filter-game" class="select select-bordered bg-white w-full">
-          <option value="TUTTI">Tutti i giochi</option>
-          <option value="Pokémon">Pokémon</option>
-          <option value="Magic: The Gathering">Magic: The Gathering</option>
-          <option value="Yu-Gi-Oh!">Yu-Gi-Oh!</option>
-          <option value="One Piece">One Piece</option>
-          <option value="Altro">Altro</option>
-        </select>
+    <!-- CONTENUTO PUBBLICO (il login serve solo per pubblicare) -->
+    <div id="content-main">
 
-        <!-- Filtro Tipo -->
-        <select id="filter-type" class="select select-bordered bg-white w-full">
-          <option value="TUTTI">Vendita & Scambio</option>
-          <option value="Vendita">Solo Vendita</option>
-          <option value="Scambio">Solo Scambio</option>
-          <option value="Vendita / Scambio">Vendita o Scambio</option>
-        </select>
+      <!-- BARRA FILTRI -->
+      <section class="max-w-6xl mx-auto px-4 md:px-8 pt-6">
+        <div class="bg-gray-50 p-4 rounded-2xl border border-gray-100 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 items-center">
+          <input type="text" id="filter-search" placeholder="Cerca nome carta o venditore..." class="input input-bordered bg-white w-full" />
 
-        <!-- Toggle Solo Mie Carte (visibile solo se loggato) -->
-        <div id="filter-mine-wrapper" class="hidden flex items-center justify-between sm:justify-start gap-2 px-2">
-          <input type="checkbox" id="filter-mine" class="toggle toggle-primary" />
-          <label for="filter-mine" class="label-text cursor-pointer font-bold text-gray-700">Solo le mie carte</label>
+          <select id="filter-game" class="select select-bordered bg-white w-full">
+            <option value="TUTTI">Tutti i giochi</option>
+            <option value="Pokémon">Pokémon</option>
+            <option value="Magic: The Gathering">Magic: The Gathering</option>
+            <option value="Yu-Gi-Oh!">Yu-Gi-Oh!</option>
+            <option value="One Piece">One Piece</option>
+            <option value="Altro">Altro</option>
+          </select>
+
+          <select id="filter-type" class="select select-bordered bg-white w-full">
+            <option value="TUTTI">Vendita & Scambio</option>
+            <option value="Vendita">Solo Vendita</option>
+            <option value="Scambio">Solo Scambio</option>
+            <option value="Vendita / Scambio">Vendita o Scambio</option>
+          </select>
+
+          <div id="filter-mine-wrapper" class="hidden flex items-center justify-between sm:justify-start gap-2 px-2">
+            <input type="checkbox" id="filter-mine" class="toggle toggle-primary" />
+            <label for="filter-mine" class="label-text cursor-pointer font-bold text-gray-700">Solo le mie carte</label>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- GRIGLIA CARTE -->
-    <section class="max-w-6xl mx-auto px-4 md:px-8 py-8">
-      <div id="loading-spinner" class="flex justify-center py-12">
-        <span class="loading loading-spinner loading-lg text-[#d32436]"></span>
-      </div>
+      <!-- GRIGLIA CARTE -->
+      <section class="max-w-6xl mx-auto px-4 md:px-8 py-8">
+        <div id="loading-spinner" class="flex justify-center py-12">
+          <span class="loading loading-spinner loading-lg text-[#d32436]"></span>
+        </div>
 
-      <div id="empty-state" class="hidden text-center py-16 bg-gray-50 rounded-3xl border border-gray-100 space-y-2">
-        <p class="text-xl font-black text-gray-800">Nessuna carta trovata 😕</p>
-        <p class="text-sm text-gray-500">Prova a cambiare filtri oppure accedi con Google per pubblicare la prima carta!</p>
-      </div>
+        <div id="empty-state" class="hidden text-center py-16 bg-gray-50 rounded-3xl border border-gray-100 space-y-2">
+          <p class="text-xl font-black text-gray-800">Nessuna carta trovata 😕</p>
+          <p class="text-sm text-gray-500">Prova a cambiare i filtri oppure accedi con Google per pubblicare la prima carta!</p>
+        </div>
 
-      <div id="cards-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        <!-- Le card vengono generate dinamicamente qui -->
-      </div>
-    </section>
+        <div id="cards-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <!-- Le card vengono generate dinamicamente qui -->
+        </div>
+      </section>
+    </div>
 
   </main>
 
@@ -119,7 +119,7 @@
         <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
       </form>
       <h3 class="font-black text-xl text-gray-900 mb-4">Pubblica una carta</h3>
-      
+
       <form id="form-nuova-carta" class="space-y-3">
         <div class="form-control">
           <label class="label"><span class="label-text font-bold">Nome Carta (ed espansione/condizioni) *</span></label>
@@ -163,7 +163,7 @@
         <div class="form-control">
           <label class="label"><span class="label-text font-bold">Numero WhatsApp (con 39) *</span></label>
           <input type="tel" id="input-whatsapp" required placeholder="Es. 393331234567" pattern="[0-9]{10,15}" class="input input-bordered w-full" />
-          <label class="label"><span class="label-text-alt text-gray-500">Salvato sul tuo dispositivo per le prossime carte</span></label>
+          <label class="label"><span class="label-text-alt text-gray-500">Serve per farti contattare in privato su WhatsApp. Sarà visibile a tutti i visitatori del sito. Salvato sul tuo dispositivo per le prossime carte</span></label>
         </div>
 
         <div class="form-control">
@@ -200,6 +200,9 @@
       measurementId: "G-NVKZ9TPBWE"
     };
 
+    // Link di invito al gruppo WhatsApp della community (scambi)
+    const GROUP_LINK = "https://chat.whatsapp.com/IEUSyUuE9yOKluKMJ28z1z";
+
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const db = getFirestore(app);
@@ -215,6 +218,7 @@
     const loadingSpinner = document.getElementById("loading-spinner");
     const emptyState = document.getElementById("empty-state");
 
+    // Precompila i campi del form con i dati salvati sul dispositivo
     if (localStorage.getItem("mz_whatsapp")) {
       document.getElementById("input-whatsapp").value = localStorage.getItem("mz_whatsapp");
     }
@@ -222,14 +226,34 @@
       document.getElementById("input-venditore").value = localStorage.getItem("mz_nick");
     }
 
-    document.getElementById("btn-login").addEventListener("click", async () => {
+    // Escape per evitare HTML injection dai dati scritti dagli utenti
+    function esc(str) {
+      return String(str ?? "").replace(/[&<>"']/g, c => ({
+        "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+      }[c]));
+    }
+
+    function showToast(text) {
+      const t = document.createElement("div");
+      t.className = "toast toast-top toast-center z-[100]";
+      t.innerHTML = `<div class="alert alert-success text-white font-bold">${esc(text)}</div>`;
+      document.body.appendChild(t);
+      setTimeout(() => t.remove(), 3500);
+    }
+
+    async function login() {
       try {
         await signInWithPopup(auth, provider);
       } catch (err) {
-        alert("Errore durante l'accesso: " + err.message);
+        if (err.code === "auth/popup-blocked") {
+          alert("Il browser ha bloccato la finestra di login Google: consenti i popup per questo sito e riprova!");
+        } else if (err.code !== "auth/popup-closed-by-user" && err.code !== "auth/cancelled-popup-request") {
+          alert("Errore durante l'accesso: " + err.message);
+        }
       }
-    });
+    }
 
+    document.getElementById("btn-login").addEventListener("click", login);
     document.getElementById("btn-logout").addEventListener("click", () => signOut(auth));
 
     onAuthStateChanged(auth, (user) => {
@@ -268,8 +292,10 @@
             ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
             resolve(canvas.toDataURL("image/jpeg", 0.72));
           };
+          img.onerror = () => resolve("");
           img.src = e.target.result;
         };
+        reader.onerror = () => resolve("");
         reader.readAsDataURL(file);
       });
     }
@@ -295,9 +321,9 @@
       const onlyMine = document.getElementById("filter-mine").checked;
 
       const filtered = allCards.filter(card => {
-        const matchText = !searchText || 
-          card.titolo.toLowerCase().includes(searchText) || 
-          card.venditore.toLowerCase().includes(searchText);
+        const matchText = !searchText ||
+          (card.titolo || "").toLowerCase().includes(searchText) ||
+          (card.venditore || "").toLowerCase().includes(searchText);
         const matchGame = selectedGame === "TUTTI" || card.gioco === selectedGame;
         const matchType = selectedType === "TUTTI" || card.tipo === selectedType;
         const matchMine = !onlyMine || (currentUser && card.userId === currentUser.uid);
@@ -312,10 +338,17 @@
       emptyState.classList.add("hidden");
 
       filtered.forEach(card => {
-        const isOwner = currentUser && card.userId === currentUser.uid;
+        const isOwner = !!currentUser && card.userId === currentUser.uid;
         const cleanPhone = (card.whatsapp || "").replace(/\D/g, "");
-        const waText = encodeURIComponent(`Ciao ${card.venditore}! Ho visto su Mala Zone che hai disponibile: "${card.titolo}" (${card.gioco}). È ancora disponibile?`);
-        const waLink = `https://wa.me/${cleanPhone}?text=${waText}`;
+
+        // Messaggio per il gruppo (testo semplice, senza escape: viene copiato negli appunti)
+        const msg = `Ciao ${card.venditore}! Ho visto su Mala Zone che hai disponibile: "${card.titolo}" (${card.gioco}). È ancora disponibile?`;
+        const privateLink = cleanPhone ? `https://wa.me/${cleanPhone}?text=${encodeURIComponent(msg)}` : "";
+
+
+        // Annuncio da condividere nel gruppo (solo per il proprietario della carta)
+        const shareMsg = `Ho in ${(card.tipo || "vendita").toLowerCase()}: "${card.titolo}" (${card.gioco})${card.prezzo ? " - " + card.prezzo : ""}. Guarda la bacheca: ${location.origin}${location.pathname}`;
+
         const imgSrc = card.foto || "https://placehold.co/400x500/f3f4f6/6b7280?text=Nessuna+Foto";
 
         const badgeColor = card.gioco === "Pokémon" ? "bg-[#f9bb0b] text-gray-900 border-none" :
@@ -326,33 +359,57 @@
         cardEl.className = "card bg-white shadow-sm hover:shadow-md transition-shadow border border-gray-100 rounded-2xl overflow-hidden flex flex-col";
         cardEl.innerHTML = `
           <figure class="h-56 bg-gray-100 relative">
-            <img src="${imgSrc}" alt="${card.titolo}" class="w-full h-full object-cover" loading="lazy" />
-            <span class="badge ${badgeColor} font-bold absolute top-3 left-3 shadow-sm">${card.gioco}</span>
-            <span class="badge bg-white/90 text-gray-800 border-none font-semibold absolute bottom-3 right-3 shadow-sm">${card.tipo}</span>
+            <img src="${esc(imgSrc)}" alt="${esc(card.titolo)}" class="w-full h-full object-cover" loading="lazy" />
+            <span class="badge ${badgeColor} font-bold absolute top-3 left-3 shadow-sm">${esc(card.gioco)}</span>
+            <span class="badge bg-white/90 text-gray-800 border-none font-semibold absolute bottom-3 right-3 shadow-sm">${esc(card.tipo)}</span>
           </figure>
           <div class="card-body p-5 flex-1 flex flex-col justify-between">
             <div>
-              <h2 class="font-bold text-gray-900 text-base leading-snug">${card.titolo}</h2>
-              <p class="text-lg font-black text-[#d32436] mt-1">${card.prezzo || "Solo Scambio"}</p>
-              <p class="text-xs text-gray-500 mt-1">Proposta da: <strong class="text-gray-800">${card.venditore}</strong></p>
+              <h2 class="font-bold text-gray-900 text-base leading-snug">${esc(card.titolo)}</h2>
+              <p class="text-lg font-black text-[#d32436] mt-1">${esc(card.prezzo || "Solo Scambio")}</p>
+              <p class="text-xs text-gray-500 mt-1">Proposta da: <strong class="text-gray-800">${esc(card.venditore)}</strong></p>
             </div>
             <div class="card-actions mt-4 flex flex-col gap-2">
-              <a href="${waLink}" target="_blank" rel="noopener" class="btn btn-success btn-sm w-full text-white font-bold">
-                Contatta ${card.venditore}
-              </a>
-              ${isOwner ? `<button data-id="${card.id}" class="btn-delete btn btn-outline btn-error btn-xs w-full">Segna come venduta / Rimuovi</button>` : ""}
+              ${isOwner ? `
+                <button data-msg="${encodeURIComponent(shareMsg)}" class="btn-share btn btn-success btn-sm w-full text-white font-bold">
+                  Condividi nel gruppo
+                </button>
+                <button data-id="${esc(card.id)}" class="btn-delete btn btn-outline btn-error btn-xs w-full">Segna come venduta / Rimuovi</button>
+              ` : (privateLink ? `
+                <a href="${privateLink}" target="_blank" rel="noopener" class="btn btn-success btn-sm w-full text-white font-bold">
+                  Contatta ${esc(card.venditore)}
+                </a>
+              ` : `<p class="text-xs text-center text-gray-500">Contatto non disponibile</p>`)}
             </div>
           </div>
         `;
         cardsGrid.appendChild(cardEl);
       });
 
+      // Condividi nel gruppo: copia l'annuncio e apre il gruppo WhatsApp
+      document.querySelectorAll(".btn-share").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const msg = decodeURIComponent(btn.dataset.msg);
+          // Niente await prima di window.open, altrimenti il browser può bloccare il popup
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(msg).catch(() => {});
+          }
+          showToast("Annuncio copiato! Incollalo nel gruppo 📋");
+          window.open(GROUP_LINK, "_blank", "noopener");
+        });
+      });
+
+      // Rimozione carta (solo proprietario)
       document.querySelectorAll(".btn-delete").forEach(btn => {
         btn.addEventListener("click", async (e) => {
-          const id = e.target.getAttribute("data-id");
+          const id = e.currentTarget.getAttribute("data-id");
           if (confirm("Vuoi rimuovere questa carta dalla bacheca?")) {
-            await deleteDoc(doc(db, "carte", id));
-            await loadCards();
+            try {
+              await deleteDoc(doc(db, "carte", id));
+              await loadCards();
+            } catch (err) {
+              alert("Errore durante la rimozione: " + err.message);
+            }
           }
         });
       });
@@ -398,7 +455,7 @@
         document.getElementById("modal_aggiungi").close();
         await loadCards();
       } catch (err) {
-        alert("Errore salvataggio (controlla le regole Firestore): " + err.message);
+        alert("Errore salvataggio: " + err.message);
       } finally {
         btnSubmit.disabled = false;
         btnSubmit.textContent = "Pubblica Carta";
