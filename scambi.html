@@ -201,9 +201,11 @@
 
   <!-- MODAL DETTAGLIO SINGOLA CARTA -->
   <dialog id="modal_dettaglio" class="modal">
-    <div class="modal-box max-w-lg bg-white p-0 overflow-hidden">
+    <div class="modal-box max-w-lg bg-white p-0 overflow-hidden flex flex-col max-h-[90vh]">
       <button id="btn-close-dettaglio" class="btn btn-sm btn-circle bg-white/90 hover:bg-white border-none shadow-md absolute right-3 top-3 z-10">✕</button>
-      <div id="dettaglio-body"></div>
+      <div class="overflow-y-auto flex-1">
+        <div id="dettaglio-body"></div>
+      </div>
     </div>
     <form method="dialog" class="modal-backdrop">
       <button id="backdrop-close-dettaglio">close</button>
